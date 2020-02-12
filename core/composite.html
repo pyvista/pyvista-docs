@@ -1,0 +1,623 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Composite Datasets &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Filters" href="filters.html" />
+    <link rel="prev" title="Gridded Data" href="grids.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Core API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="objects.html">Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="points.html">Point Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="point-grids.html">Point-Based Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grids.html">Gridded Data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Composite Datasets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multiblock-datasets">MultiBlock Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Core API</a> &raquo;</li>
+        
+      <li>Composite Datasets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/core/composite.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-pyvista.composite">
+<span id="composite-datasets"></span><h1>Composite Datasets<a class="headerlink" href="#module-pyvista.composite" title="Permalink to this headline">¶</a></h1>
+<p>Container to mimic <code class="docutils literal notranslate"><span class="pre">vtkMultiBlockDataSet</span></code> objects.</p>
+<p>These classes hold many VTK datasets in one object that can be passed
+to VTK algorithms and PyVista filtering/plotting routines.</p>
+<div class="section" id="multiblock-datasets">
+<h2>MultiBlock Datasets<a class="headerlink" href="#multiblock-datasets" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bounds</span></code></p></td>
+<td><p>Find min/max for bounds across blocks.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">center</span></code></p></td>
+<td><p>Return the center of the bounding box.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">length</span></code></p></td>
+<td><p>Return the length of the diagonal of the bounding box.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_blocks</span></code></p></td>
+<td><p>Return the total number of blocks set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">volume</span></code></p></td>
+<td><p>Return the total volume of all meshes in this dataset.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">append</span></code>(data)</p></td>
+<td><p>Add a data set to the next block index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">clean</span></code>([empty])</p></td>
+<td><p>Remove any null blocks in place.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>([deep])</p></td>
+<td><p>Return a copy of the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_meta_from</span></code>(ido)</p></td>
+<td><p>Copy pyvista meta data onto this object from another object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(index)</p></td>
+<td><p>Get a block by its index or name.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_block_name</span></code>(index)</p></td>
+<td><p>Return the string name of the block at the given index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data_range</span></code>(name)</p></td>
+<td><p>Get the min/max of an array given its name across all blocks.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_index_by_name</span></code>(name)</p></td>
+<td><p>Find the index number by block name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code>()</p></td>
+<td><p>Get all the block names in the dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">next</span></code>()</p></td>
+<td><p>Get the next block from the iterator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code>([off_screen, full_screen, screenshot, …])</p></td>
+<td><p>Plot a vtk or numpy object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code>(index)</p></td>
+<td><p>Pop off a block at the specified index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code>(filename[, binary])</p></td>
+<td><p>Write a <code class="docutils literal notranslate"><span class="pre">MultiBlock</span></code> dataset to disk.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_block_name</span></code>(index, name)</p></td>
+<td><p>Set a block’s string name at the specified index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrap_nested</span></code>()</p></td>
+<td><p>Ensure that all nested data structures are wrapped as PyVista datasets.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pyvista.MultiBlock">
+<em class="property">class </em><code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">MultiBlock</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">vtkCommonDataModelPython.vtkMultiBlockDataSet</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.core.filters.CompositeFilters</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.core.common.DataObject</span></code></p>
+<p>A composite class to hold many data sets which can be iterated over.</p>
+<p>This wraps/extends the <code class="docutils literal notranslate"><span class="pre">vtkMultiBlockDataSet</span></code> class in VTK so that we can
+easily plot these data sets and use the composite in a Pythonic manner.</p>
+<p>You can think of <code class="docutils literal notranslate"><span class="pre">MultiBlock</span></code> like lists or dictionaries as we can
+iterate over this data structure by index and we can also access blocks
+by their string name.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create empty composite dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Add a dataset to the collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sphere</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Or add a named block</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;cube&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Cube</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># instantiate from a list of objects</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(),</span> <span class="n">pv</span><span class="o">.</span><span class="n">Cube</span><span class="p">(),</span> <span class="n">pv</span><span class="o">.</span><span class="n">Cone</span><span class="p">()]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># instantiate from a dictionary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;cube&quot;</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">Cube</span><span class="p">(),</span> <span class="s2">&quot;sphere&quot;</span><span class="p">:</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">blocks</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">MultiBlock</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># now iterate over the collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">blocks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="n">block</span> <span class="o">=</span> <span class="n">blocks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="c1"># do something!</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="n">blocks</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">surf</span> <span class="o">=</span> <span class="n">block</span><span class="o">.</span><span class="n">extract_surface</span><span class="p">()</span> <span class="c1"># Do something with each dataset</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyvista.MultiBlock.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a data set to the next block index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.bounds">
+<em class="property">property </em><code class="sig-name descname">bounds</code><a class="headerlink" href="#pyvista.MultiBlock.bounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find min/max for bounds across blocks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>length 6 tuple of floats containing min/max along each axis</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple(float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.center">
+<em class="property">property </em><code class="sig-name descname">center</code><a class="headerlink" href="#pyvista.MultiBlock.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the center of the bounding box.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.clean">
+<code class="sig-name descname">clean</code><span class="sig-paren">(</span><em class="sig-param">empty=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove any null blocks in place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>empty</strong> (<em>bool</em>) – Remove any meshes that are empty as well (have zero points).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>optional</em>) – When True makes a full copy of the object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>newobject</strong> – Deep or shallow copy of the input.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>same as input</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.copy_meta_from">
+<code class="sig-name descname">copy_meta_from</code><span class="sig-paren">(</span><em class="sig-param">ido</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.copy_meta_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy pyvista meta data onto this object from another object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a block by its index or name.</p>
+<p>If the name is non-unique then returns the first occurrence.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.get_block_name">
+<code class="sig-name descname">get_block_name</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.get_block_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the string name of the block at the given index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.get_data_range">
+<code class="sig-name descname">get_data_range</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.get_data_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the min/max of an array given its name across all blocks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.get_index_by_name">
+<code class="sig-name descname">get_index_by_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.get_index_by_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the index number by block name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the block names in the dataset.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.length">
+<em class="property">property </em><code class="sig-name descname">length</code><a class="headerlink" href="#pyvista.MultiBlock.length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the length of the diagonal of the bounding box.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.n_blocks">
+<em class="property">property </em><code class="sig-name descname">n_blocks</code><a class="headerlink" href="#pyvista.MultiBlock.n_blocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total number of blocks set.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the next block from the iterator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">off_screen=None</em>, <em class="sig-param">full_screen=False</em>, <em class="sig-param">screenshot=None</em>, <em class="sig-param">interactive=True</em>, <em class="sig-param">cpos=None</em>, <em class="sig-param">window_size=None</em>, <em class="sig-param">show_bounds=False</em>, <em class="sig-param">show_axes=True</em>, <em class="sig-param">notebook=None</em>, <em class="sig-param">background=None</em>, <em class="sig-param">text=''</em>, <em class="sig-param">return_img=False</em>, <em class="sig-param">eye_dome_lighting=False</em>, <em class="sig-param">use_panel=None</em>, <em class="sig-param">volume=False</em>, <em class="sig-param">parallel_projection=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot a vtk or numpy object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item</strong> (<em>vtk</em><em> or </em><em>numpy object</em>) – VTK object or numpy array to be plotted.</p></li>
+<li><p><strong>off_screen</strong> (<em>bool</em>) – Plots off screen when True.  Helpful for saving screenshots
+without a window popping up.</p></li>
+<li><p><strong>full_screen</strong> (<em>bool</em><em>, </em><em>optional</em>) – Opens window in full screen.  When enabled, ignores window_size.
+Default False.</p></li>
+<li><p><strong>screenshot</strong> (<em>str</em><em> or </em><em>bool</em><em>, </em><em>optional</em>) – <p>Saves screenshot to file when enabled.  See:
+help(pyvistanterface.Plotter.screenshot).  Default disabled.</p>
+<p>When True, takes screenshot and returns numpy array of image.</p>
+</p></li>
+<li><p><strong>window_size</strong> (<em>list</em><em>, </em><em>optional</em>) – Window size in pixels.  Defaults to [1024, 768]</p></li>
+<li><p><strong>show_bounds</strong> (<em>bool</em><em>, </em><em>optional</em>) – Shows mesh bounds when True.  Default False. Alias <code class="docutils literal notranslate"><span class="pre">show_grid</span></code> also
+accepted.</p></li>
+<li><p><strong>notebook</strong> (<em>bool</em><em>, </em><em>optional</em>) – When True, the resulting plot is placed inline a jupyter notebook.
+Assumes a jupyter console is active.</p></li>
+<li><p><strong>show_axes</strong> (<em>bool</em><em>, </em><em>optional</em>) – Shows a vtk axes widget.  Enabled by default.</p></li>
+<li><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – Adds text at the bottom of the plot.</p></li>
+<li><p><strong>volume</strong> (<em>bool</em><em>, </em><em>optional</em>) – Use the <code class="docutils literal notranslate"><span class="pre">add_volume</span></code> method for volume rendering.</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional keyword arguments</em>) – See help(Plotter.add_mesh) for additional options.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>cpos</strong> (<em>list</em>) – List of camera position, focal point, and view up.</p></li>
+<li><p><strong>img</strong> (<em>numpy.ndarray</em>) – Array containing pixel RGB and alpha.  Sized:
+[Window height x Window width x 3] for transparent_background=False
+[Window height x Window width x 4] for transparent_background=True
+Returned only when screenshot enabled</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pop off a block at the specified index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">binary=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a <code class="docutils literal notranslate"><span class="pre">MultiBlock</span></code> dataset to disk.</p>
+<p>Written file may be an ASCII or binary vtm file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Filename of mesh to be written.  File type is inferred from
+the extension of the filename unless overridden with
+ftype.  Can be one of the following types (.vtm or .vtmb)</p></li>
+<li><p><strong>binary</strong> (<em>bool</em><em>, </em><em>optional</em>) – Writes the file as binary when True and ASCII when False.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Binary files write much faster than ASCII and have a smaller
+file size.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.set_block_name">
+<code class="sig-name descname">set_block_name</code><span class="sig-paren">(</span><em class="sig-param">index</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.set_block_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a block’s string name at the specified index.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.volume">
+<em class="property">property </em><code class="sig-name descname">volume</code><a class="headerlink" href="#pyvista.MultiBlock.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total volume of all meshes in this dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>volume</strong> – Total volume of the mesh.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.MultiBlock.wrap_nested">
+<code class="sig-name descname">wrap_nested</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.MultiBlock.wrap_nested" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ensure that all nested data structures are wrapped as PyVista datasets.</p>
+<p>This is performed in place.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="filters.html" class="btn btn-neutral float-right" title="Filters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="grids.html" class="btn btn-neutral float-left" title="Gridded Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+:orphan:
+
+
+
+.. _sphx_glr_examples:
+
+.. _ref_examples:
+
+Quick Examples
+==============
+
+Here is a gallery of all the quick examples demonstrating what PyVista can do!
+
+All of these examples are live and available on MyBinder!
+
+.. image:: https://static.mybinder.org/badge_logo.svg
+   :target: https://mybinder.org/v2/gh/pyvista/pyvista-examples/master
+   :alt: Launch on Binder
+
+
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. _sphx_glr_examples_00-load:
+
+Mesh Creation
+-------------
+
+These examples demo how to read various file types into PyVista mesh objects,
+create meshes from NumPy arrays, and how to create primitive geometric objects
+like spheres, arrows, cubes, ellipsoids and more!
+Once a mesh is loaded, it is ready for plotting with just a few lines
+of code - explore these examples to get started with using PyVista for your
+data.
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The &quot;Hello, world!&quot; of VTK">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-geometric-objects_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-geometric-objects.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-geometric-objects
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Creating parametric objects">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-parametric-geometric-objects_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-parametric-geometric-objects.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-parametric-geometric-objects
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a pyvista.PolyData object from a point cloud of vertices and scalar arrays for those poi...">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-point-cloud_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-point-cloud.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-point-cloud
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Creating a PolyData (triangulated surface) object from NumPy arrays of the vertices and faces.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-poly_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-poly.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-poly
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a spline/polyline from a numpy array of XYZ vertices">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-spline_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-spline.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-spline
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a StructuredGrid surface from NumPy arrays">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-structured-surface_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-structured-surface.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-structured-surface
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a surface from a set of points through a Delaunay triangulation.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-tri-surface_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-tri-surface.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-tri-surface
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create a simple uniform grid from a 3D NumPy array of values.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-uniform-grid_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-uniform-grid.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-uniform-grid
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Create an irregular, unstructured grid from NumPy arrays.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_create-unstructured-surface_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_create-unstructured-surface.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/create-unstructured-surface
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="PyVista leverages `meshio`_ to read many mesh formats not natively supported by VTK including t...">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_read-dolfin_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_read-dolfin.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/read-dolfin
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read a dataset from a known file type.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_read-file_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_read-file.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/read-file
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Read and plot image files (JPEG, TIFF, PNG, etc).">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_read-image_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_read-image.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/read-image
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="The VTK library supports parallel file formats. Reading meshes broken up into several files is ...">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_read-parallel_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_read-parallel.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/read-parallel
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Use a topographic surface to create a 3D terrain-following mesh.">
+
+.. only:: html
+
+ .. figure:: /examples/00-load/images/thumb/sphx_glr_terrain-mesh_thumb.png
+
+     :ref:`sphx_glr_examples_00-load_terrain-mesh.py`
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/00-load/terrain-mesh
+.. raw:: html
+
+    <div class="sphx-glr-clear"></div>
+
+
+
+.. only:: html
+
+ .. rst-class:: sphx-glr-signature
+
+    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

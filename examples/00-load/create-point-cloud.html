@@ -1,0 +1,469 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create Point Cloud &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Create PolyData" href="create-poly.html" />
+    <link rel="prev" title="Parametric Geometric Objects" href="create-parametric-geometric-objects.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#mesh-creation">Mesh Creation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="create-geometric-objects.html">Geometric Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-parametric-geometric-objects.html">Parametric Geometric Objects</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create Point Cloud</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-poly.html">Create PolyData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-spline.html">Creating a Spline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-structured-surface.html">Creating a Structured Surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-tri-surface.html">Create Triangulated Surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-uniform-grid.html">Creating a Uniform Grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create-unstructured-surface.html">Creating an Unstructured Surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-dolfin.html">Read FEniCS/Dolfin Meshes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-file.html">Load and Plot from a File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-image.html">Read Image Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="read-parallel.html">Parallel Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="terrain-mesh.html">Terrain Following Mesh</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+        
+      <li>Create Point Cloud</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/examples/00-load/create-point-cloud.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-00-load-create-point-cloud-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="create-point-cloud">
+<span id="sphx-glr-examples-00-load-create-point-cloud-py"></span><span id="id1"></span><h1>Create Point Cloud<a class="headerlink" href="#create-point-cloud" title="Permalink to this headline">¶</a></h1>
+<p>Create a <a class="reference internal" href="../../core/points.html#pyvista.PolyData" title="pyvista.PolyData"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.PolyData</span></code></a> object from a point cloud of vertices and
+scalar arrays for those points.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+</pre></div>
+</div>
+<p>Point clouds are generally constructed in the <a class="reference internal" href="../../core/points.html#pyvista.PolyData" title="pyvista.PolyData"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.PolyData</span></code></a> class
+and can easiy have scalar/vector data arrays associated with the point
+cloud. In this example, we’ll work a bit backwards using a point cloud that
+that is available from our <code class="docutils literal notranslate"><span class="pre">examples</span></code> module. This however is no different
+than creating a PyVista mesh with your own NumPy arrays of vertice locations.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define some helpers - ignore these and use your own data!</span>
+<span class="k">def</span> <span class="nf">generate_points</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="mf">0.02</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A helper to make a 3D NumPy array of points (n_points by 3)&quot;&quot;&quot;</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">download_lidar</span><span class="p">()</span>
+    <span class="n">ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_points</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                            <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">n_points</span> <span class="o">*</span> <span class="n">subset</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dataset</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">ids</span><span class="p">]</span>
+
+
+<span class="n">points</span> <span class="o">=</span> <span class="n">generate_points</span><span class="p">()</span>
+<span class="c1"># Print first 5 rows to prove its a numpy array (n_points by 3)</span>
+<span class="c1"># Columns are (X Y Z)</span>
+<span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[4.81111975e+05, 4.40011200e+06, 1.76215002e+03],
+                 [4.81084675e+05, 4.40009390e+06, 1.77039001e+03],
+                 [4.81106375e+05, 4.40014810e+06, 1.75917004e+03],
+                 [4.81015475e+05, 4.40021370e+06, 1.76435999e+03],
+                 [4.81112475e+05, 4.40007920e+06, 1.76060999e+03]])
+</pre></div>
+</div>
+<p>Now that you have a NumPy array of points/vertices either from our sample
+data or your own project, creating a PyVista mesh of those points is simply:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+<span class="n">point_cloud</span>
+</pre></div>
+</div>
+<table>
+<tr><th>PolyData</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>67841</td></tr>
+<tr><td>N Points</td><td>67841</td></tr>
+<tr><td>X Bounds</td><td>4.809e+05, 4.811e+05</td></tr>
+<tr><td>Y Bounds</td><td>4.400e+06, 4.400e+06</td></tr>
+<tr><td>Z Bounds</td><td>1.754e+03, 1.785e+03</td></tr>
+<tr><td>N Arrays</td><td>0</td></tr>
+</table>
+
+
+<br />
+<br /><p>And we can even do a sanity check</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">point_cloud</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+<p>And now that we have a PyVista mesh, we can plot it. Note that we add an
+option to use eye dome lighting - this is a shading technique to improve
+depth perception with point clouds (learn more in <span class="xref std std-ref">ref_edl</span>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eye_dome_lighting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_create-point-cloud_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.05062404677, 4400455.175623749, 2062.9656020970538),
+ (481028.37499997707, 4400161.49999968, 1769.2899780273438),
+ (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
+<p>Now what if you have data attributes (scalar/vector arrays) that you’d like
+to associate with every node of your mesh? You can easily add NumPy data
+arrays that have a length equal to the number of points in the mesh along the
+first axis. For example, lets add a few arrays to this new <code class="docutils literal notranslate"><span class="pre">point_cloud</span></code>
+mesh.</p>
+<p>Make an array of scalar values with the same length as the points array.
+Each element in this array will correspond to points at the same index:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make data array using z-component of points array</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">points</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Add that data to the mesh with the name &quot;uniform dist&quot;</span>
+<span class="n">point_cloud</span><span class="p">[</span><span class="s2">&quot;elevation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>And now we can plot the point cloud with that random data. PyVista is smart
+enough to plot the scalar array you added by default. Note that this time,
+we specify to render every point as its own sphere.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">render_points_as_spheres</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_create-point-cloud_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.05062404677, 4400455.175623749, 2062.9656020970538),
+ (481028.37499997707, 4400161.49999968, 1769.2899780273438),
+ (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
+<p>That data is kind of boring, right? You can also add data arrays with
+more than one scalar value - perhaps a vector with three elements? Let’s
+make a little function that will compute vectors for every node in the point
+cloud and add those vectors to the mesh.</p>
+<p>This time, we’re going to create a totally new, random point cloud.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create random XYZ points</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Make PolyData</span>
+<span class="n">point_cloud</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PolyData</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute_vectors</span><span class="p">(</span><span class="n">mesh</span><span class="p">):</span>
+    <span class="n">origin</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">center</span>
+    <span class="n">vectors</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">points</span> <span class="o">-</span> <span class="n">origin</span>
+    <span class="n">vectors</span> <span class="o">=</span> <span class="n">vectors</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vectors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">vectors</span>
+
+<span class="n">vectors</span> <span class="o">=</span> <span class="n">compute_vectors</span><span class="p">(</span><span class="n">point_cloud</span><span class="p">)</span>
+<span class="n">vectors</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[-1.72704700e-05, -4.22116248e-01, -9.06541710e-01],
+                 [ 4.23535384e-01,  9.00748399e-01, -9.62813626e-02],
+                 [-9.48023674e-01,  1.44354600e-01,  2.83571618e-01],
+                 [ 8.66409443e-01,  1.87236483e-01, -4.62900827e-01],
+                 [ 1.04861538e-01, -6.09331858e-01,  7.85950854e-01]])
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="p">[</span><span class="s1">&#39;vectors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vectors</span>
+</pre></div>
+</div>
+<p>Now we can make arrows using those vectors using the glyph filter
+(see <span class="xref std std-ref">glyph_example</span> for more details).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arrows</span> <span class="o">=</span> <span class="n">point_cloud</span><span class="o">.</span><span class="n">glyph</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;vectors&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,)</span>
+
+<span class="c1"># Display the arrows</span>
+<span class="n">plotter</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">point_cloud</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;maroon&#39;</span><span class="p">,</span> <span class="n">point_size</span><span class="o">=</span><span class="mf">10.</span><span class="p">,</span>
+                 <span class="n">render_points_as_spheres</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">arrows</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">)</span>
+<span class="c1"># plotter.add_point_labels([point_cloud.center,], [&#39;Center&#39;,],</span>
+<span class="c1">#                          point_color=&#39;yellow&#39;, point_size=20)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">show_grid</span><span class="p">()</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_create-point-cloud_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(2.8028804985279363, 2.8110401397043985, 2.816317430644683),
+ (0.47943051159381866, 0.48759015277028084, 0.49286744371056557),
+ (0.0, 0.0, 1.0)]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.418 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-00-load-create-point-cloud-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/b56f133896ca717685efadc3dcd1d66c/create-point-cloud.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">create-point-cloud.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/664e852dddbb8c818a745905d94f18dc/create-point-cloud.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">create-point-cloud.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="create-poly.html" class="btn btn-neutral float-right" title="Create PolyData" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create-parametric-geometric-objects.html" class="btn btn-neutral float-left" title="Parametric Geometric Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
