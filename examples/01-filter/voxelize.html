@@ -1,0 +1,464 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Voxelize a Surface Mesh &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Clearing a Mesh or the Entire Plot" href="../02-plot/clear.html" />
+    <link rel="prev" title="Using Common Filters" href="using-filters.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mesh-creation">Mesh Creation</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#filtering">Filtering</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="boolean-operations.html">Boolean Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cell-centers.html">Extract Cell Centers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clipping-with-surface.html">Clipping with a Surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clipping.html">Clipping with Planes &amp; Boxes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compute-normals.html">Computing Surface Normals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="compute-volume.html">Volumetric Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connectivity.html">Connectivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contouring.html">Contouring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="decimate.html">Decimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="distance-between-surfaces.html">Distance Between Two Surfaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract-cells-inside-surface.html">Extract Cells Inside Surface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract-edges.html">Extract Edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian-smoothing.html">Gaussian Smoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geodesic.html">Geodesic Paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glyphs.html">Plotting Glyphs (Vectors)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gradients.html">Compute Gradients of a Field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="poly-ray-trace.html">Ray Tracing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-plane.html">Project to a Plane</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resample.html">Resampling &amp; Interpolating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="slicing.html">Slicing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streamlines.html">Streamlines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="subdivide.html">Subdivide Cells</a></li>
+<li class="toctree-l3"><a class="reference internal" href="surface-smoothing.html">Surface Smoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-filters.html">Using Common Filters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Voxelize a Surface Mesh</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#plotting">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#advanced">Advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+        
+      <li>Voxelize a Surface Mesh</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/examples/01-filter/voxelize.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-01-filter-voxelize-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="voxelize-a-surface-mesh">
+<span id="sphx-glr-examples-01-filter-voxelize-py"></span><h1>Voxelize a Surface Mesh<a class="headerlink" href="#voxelize-a-surface-mesh" title="Permalink to this headline">¶</a></h1>
+<p>Create a voxel model (like legos) of a closed surface or volumetric mesh.</p>
+<p>This example also demonstrates how to compute an implicit distance from a
+bounding <a class="reference internal" href="../../core/points.html#pyvista.PolyData" title="pyvista.PolyData"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.PolyData</span></code></a> surface.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 2</span>
+<span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load a surface to voxelize</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">examples</span><span class="o">.</span><span class="n">download_foot_bones</span><span class="p">()</span>
+<span class="n">surface</span>
+</pre></div>
+</div>
+<table>
+<tr><th>PolyData</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>4204</td></tr>
+<tr><td>N Points</td><td>2154</td></tr>
+<tr><td>X Bounds</td><td>-5.633e+00, 5.633e+00</td></tr>
+<tr><td>Y Bounds</td><td>-1.860e+00, 1.860e+00</td></tr>
+<tr><td>Z Bounds</td><td>-2.125e+00, 2.126e+00</td></tr>
+<tr><td>N Arrays</td><td>0</td></tr>
+</table>
+
+
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cpos</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">7.656346967151718</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.802071079151158</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.021236183314311</span><span class="p">),</span>
+ <span class="p">(</span><span class="mf">0.2224512272564101</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4594554282112895</span><span class="p">,</span> <span class="mf">0.5549738359311297</span><span class="p">),</span>
+ <span class="p">(</span><span class="o">-</span><span class="mf">0.6279216753504941</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7513057097368635</span><span class="p">,</span> <span class="mf">0.20311105371647392</span><span class="p">)]</span>
+
+<span class="n">surface</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="n">cpos</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_voxelize_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(7.656346967151718, -9.802071079151158, -11.021236183314311),
+ (0.2224512272564101, -0.4594554282112895, 0.5549738359311297),
+ (-0.6279216753504943, -0.7513057097368636, 0.20311105371647395)]
+</pre></div>
+</div>
+<p>Create a voxel model of the bounding surface</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">voxels</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">voxelize</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="n">surface</span><span class="o">.</span><span class="n">length</span><span class="o">/</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">voxels</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="n">cpos</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_voxelize_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(7.656346967151718, -9.802071079151158, -11.021236183314311),
+ (0.2224512272564101, -0.4594554282112895, 0.5549738359311297),
+ (-0.6279216753504943, -0.7513057097368636, 0.20311105371647395)]
+</pre></div>
+</div>
+<p>We could even add a scalar field to that new voxel model in case we
+wanted to create grids for modelling. In this case, let’s add a scalar field
+for bone density noting:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">voxels</span><span class="p">[</span><span class="s2">&quot;density&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">voxels</span><span class="o">.</span><span class="n">n_cells</span><span class="p">,</span> <span class="mf">3.65</span><span class="p">)</span> <span class="c1"># g/cc</span>
+<span class="n">voxels</span>
+</pre></div>
+</div>
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>UnstructuredGrid</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>93041</td></tr>
+<tr><td>N Points</td><td>113192</td></tr>
+<tr><td>X Bounds</td><td>-5.633e+00, 5.584e+00</td></tr>
+<tr><td>Y Bounds</td><td>-1.860e+00, 1.858e+00</td></tr>
+<tr><td>Z Bounds</td><td>-2.125e+00, 2.097e+00</td></tr>
+<tr><td>N Arrays</td><td>3</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td>vtkOriginalPointIds</td><td>Points</td><td>int64</td><td>1</td><td>3.685e+03</td><td>7.283e+05</td></tr>
+<tr><td><b>vtkOriginalCellIds</b></td><td>Cells</td><td>int64</td><td>1</td><td>3.624e+03</td><td>7.017e+05</td></tr>
+<tr><td>density</td><td>Cells</td><td>float64</td><td>1</td><td>3.650e+00</td><td>3.650e+00</td></tr>
+</table>
+
+</td></tr> </table>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">voxels</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="n">cpos</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_voxelize_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(7.656346967151718, -9.802071079151158, -11.021236183314311),
+ (0.2224512272564101, -0.4594554282112895, 0.5549738359311297),
+ (-0.6279216753504943, -0.7513057097368636, 0.20311105371647395)]
+</pre></div>
+</div>
+<p>A constant scalar field is kind of boring, so let’s get a little fancier by
+added a scalar field that varies by the distance from the bounding surface.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">voxels</span><span class="o">.</span><span class="n">compute_implicit_distance</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">voxels</span>
+</pre></div>
+</div>
+<table><tr><th>Header</th><th>Data Arrays</th></tr><tr><td>
+<table>
+<tr><th>UnstructuredGrid</th><th>Information</th></tr>
+<tr><td>N Cells</td><td>93041</td></tr>
+<tr><td>N Points</td><td>113192</td></tr>
+<tr><td>X Bounds</td><td>-5.633e+00, 5.584e+00</td></tr>
+<tr><td>Y Bounds</td><td>-1.860e+00, 1.858e+00</td></tr>
+<tr><td>Z Bounds</td><td>-2.125e+00, 2.097e+00</td></tr>
+<tr><td>N Arrays</td><td>4</td></tr>
+</table>
+
+</td><td>
+<table>
+<tr><th>Name</th><th>Field</th><th>Type</th><th>N Comp</th><th>Min</th><th>Max</th></tr>
+<tr><td>vtkOriginalPointIds</td><td>Points</td><td>int64</td><td>1</td><td>3.685e+03</td><td>7.283e+05</td></tr>
+<tr><td>implicit_distance</td><td>Points</td><td>float64</td><td>1</td><td>-6.951e-01</td><td>4.148e-01</td></tr>
+<tr><td>vtkOriginalCellIds</td><td>Cells</td><td>int64</td><td>1</td><td>3.624e+03</td><td>7.017e+05</td></tr>
+<tr><td><b>density</b></td><td>Cells</td><td>float64</td><td>1</td><td>3.650e+00</td><td>3.650e+00</td></tr>
+</table>
+
+</td></tr> </table>
+<br />
+<br /><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contours</span> <span class="o">=</span> <span class="n">voxels</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;implicit_distance&quot;</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">voxels</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;implicit_distance&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">contours</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="s2">&quot;implicit_distance&quot;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="n">cpos</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_voxelize_004.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_voxelize_004.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(7.656346967151718, -9.802071079151158, -11.021236183314311),
+ (0.2224512272564101, -0.4594554282112895, 0.5549738359311297),
+ (-0.6279216753504943, -0.7513057097368636, 0.20311105371647395)]
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 1 minutes  33.017 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-01-filter-voxelize-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/ef0afe261828ec60b08f5513d3f7011f/voxelize.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">voxelize.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/fd2bc5e43ae2c726c46bfb03a4422265/voxelize.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">voxelize.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../02-plot/clear.html" class="btn btn-neutral float-right" title="Clearing a Mesh or the Entire Plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="using-filters.html" class="btn btn-neutral float-left" title="Using Common Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

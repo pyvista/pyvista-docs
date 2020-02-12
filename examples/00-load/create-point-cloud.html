@@ -143,6 +143,9 @@
 <li class="toctree-l3"><a class="reference internal" href="terrain-mesh.html">Terrain Following Mesh</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filtering">Filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#plotting">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#advanced">Advanced</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../external_examples.html">External Examples</a></li>
@@ -278,11 +281,11 @@ than creating a PyVista mesh with your own NumPy arrays of vertice locations.</p
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[4.81111975e+05, 4.40011200e+06, 1.76215002e+03],
-                 [4.81084675e+05, 4.40009390e+06, 1.77039001e+03],
-                 [4.81106375e+05, 4.40014810e+06, 1.75917004e+03],
-                 [4.81015475e+05, 4.40021370e+06, 1.76435999e+03],
-                 [4.81112475e+05, 4.40007920e+06, 1.76060999e+03]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[4.81086675e+05, 4.40015510e+06, 1.75993994e+03],
+                 [4.81075575e+05, 4.40014200e+06, 1.76031006e+03],
+                 [4.81059675e+05, 4.40019120e+06, 1.75891003e+03],
+                 [4.81107875e+05, 4.40015300e+06, 1.76230005e+03],
+                 [4.80959175e+05, 4.40013180e+06, 1.76209998e+03]])
 </pre></div>
 </div>
 <p>Now that you have a NumPy array of points/vertices either from our sample
@@ -297,7 +300,7 @@ data or your own project, creating a PyVista mesh of those points is simply:</p>
 <tr><td>N Points</td><td>67841</td></tr>
 <tr><td>X Bounds</td><td>4.809e+05, 4.811e+05</td></tr>
 <tr><td>Y Bounds</td><td>4.400e+06, 4.400e+06</td></tr>
-<tr><td>Z Bounds</td><td>1.754e+03, 1.785e+03</td></tr>
+<tr><td>Z Bounds</td><td>1.754e+03, 1.787e+03</td></tr>
 <tr><td>N Arrays</td><td>0</td></tr>
 </table>
 
@@ -313,14 +316,14 @@ data or your own project, creating a PyVista mesh of those points is simply:</p>
 </div>
 <p>And now that we have a PyVista mesh, we can plot it. Note that we add an
 option to use eye dome lighting - this is a shading technique to improve
-depth perception with point clouds (learn more in <span class="xref std std-ref">ref_edl</span>).</p>
+depth perception with point clouds (learn more in <a class="reference internal" href="../02-plot/edl.html#ref-edl"><span class="std std-ref">Eye Dome Lighting</span></a>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eye_dome_lighting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../../_images/sphx_glr_create-point-cloud_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.05062404677, 4400455.175623749, 2062.9656020970538),
- (481028.37499997707, 4400161.49999968, 1769.2899780273438),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.3360099752, 4400455.4610096775, 2064.31599046686),
+ (481028.37499997707, 4400161.49999968, 1770.35498046875),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -346,8 +349,8 @@ we specify to render every point as its own sphere.</p>
 </div>
 <img alt="../../_images/sphx_glr_create-point-cloud_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.05062404677, 4400455.175623749, 2062.9656020970538),
- (481028.37499997707, 4400161.49999968, 1769.2899780273438),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.3360099752, 4400455.4610096775, 2064.31599046686),
+ (481028.37499997707, 4400161.49999968, 1770.35498046875),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -373,18 +376,18 @@ cloud and add those vectors to the mesh.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[-1.72704700e-05, -4.22116248e-01, -9.06541710e-01],
-                 [ 4.23535384e-01,  9.00748399e-01, -9.62813626e-02],
-                 [-9.48023674e-01,  1.44354600e-01,  2.83571618e-01],
-                 [ 8.66409443e-01,  1.87236483e-01, -4.62900827e-01],
-                 [ 1.04861538e-01, -6.09331858e-01,  7.85950854e-01]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[ 0.18066192,  0.56882335,  0.80237227],
+                 [ 0.32069499,  0.84075804, -0.43621169],
+                 [-0.7546461 ,  0.39629442,  0.52293403],
+                 [-0.06605839,  0.98249317, -0.17419373],
+                 [-0.5035577 , -0.72301906,  0.47294089]])
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="p">[</span><span class="s1">&#39;vectors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vectors</span>
 </pre></div>
 </div>
 <p>Now we can make arrows using those vectors using the glyph filter
-(see <span class="xref std std-ref">glyph_example</span> for more details).</p>
+(see <a class="reference internal" href="../01-filter/glyphs.html#glyph-example"><span class="std std-ref">Plotting Glyphs (Vectors)</span></a> for more details).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arrows</span> <span class="o">=</span> <span class="n">point_cloud</span><span class="o">.</span><span class="n">glyph</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;vectors&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,)</span>
 
 <span class="c1"># Display the arrows</span>
@@ -400,12 +403,12 @@ cloud and add those vectors to the mesh.</p>
 </div>
 <img alt="../../_images/sphx_glr_create-point-cloud_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(2.8028804985279363, 2.8110401397043985, 2.816317430644683),
- (0.47943051159381866, 0.48759015277028084, 0.49286744371056557),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(2.8746688539194647, 2.894078584949929, 2.89359568301912),
+ (0.4939514212310314, 0.5133611522614956, 0.5128782503306866),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  12.418 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  15.777 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-00-load-create-point-cloud-py">
 <div class="sphx-glr-download docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/b56f133896ca717685efadc3dcd1d66c/create-point-cloud.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">create-point-cloud.py</span></code></a></p>
