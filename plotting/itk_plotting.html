@@ -1,0 +1,470 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PyVista Jupyter Notebook Integration &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Widgets" href="widgets.html" />
+    <link rel="prev" title="PyVista PyQt Interface" href="qt_plotting.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Plotting</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plotting.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="qt_plotting.html">PyVista PyQt Interface</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PyVista Jupyter Notebook Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-plotting-with-itkwidgets">Example Plotting with ITKwidgets</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html">Widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Plotting</a> &raquo;</li>
+        
+      <li>PyVista Jupyter Notebook Integration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/plotting/itk_plotting.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pyvista-jupyter-notebook-integration">
+<span id="jupyter-ref"></span><h1>PyVista Jupyter Notebook Integration<a class="headerlink" href="#pyvista-jupyter-notebook-integration" title="Permalink to this headline">¶</a></h1>
+<p>PyVista has an interface for visualizing plots in Jupyter.  The
+<code class="docutils literal notranslate"><span class="pre">pyvista.PlotterITK</span></code> class allows you interactively visualize a mesh
+within a jupyter notebook.  For those who prefer plotting within
+jupyter, this is an great way of visualizing using <code class="docutils literal notranslate"><span class="pre">VTK</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pyvista</span></code>.</p>
+<p>Special thanks to thewtex
+.. _itkwidgets: <a class="reference external" href="https://github.com/InsightSoftwareConsortium/itkwidgets">https://github.com/InsightSoftwareConsortium/itkwidgets</a></p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To use <cite>PlotterITK</cite> you’ll need to install <code class="docutils literal notranslate"><span class="pre">itkwidgets&gt;=0.25.2</span></code>.
+Follow the installation steps here:
+.. _itkwidgets: <a class="reference external" href="https://github.com/InsightSoftwareConsortium/itkwidgets#installation">https://github.com/InsightSoftwareConsortium/itkwidgets#installation</a></p>
+<p>You can install everything with <cite>pip</cite> if you prefer not using conda,
+but be sure your juptyerlab is up-to-date.  If you encounter problems,
+uninstall and reinstall jupyterlab using pip.</p>
+</div>
+<div class="section" id="example-plotting-with-itkwidgets">
+<h2>Example Plotting with ITKwidgets<a class="headerlink" href="#example-plotting-with-itkwidgets" title="Permalink to this headline">¶</a></h2>
+<p>The following example shows how to create a simple plot that shows a
+simple sphere.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+
+<span class="c1"># create a mesh and identify some scalars you wish to plot</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Plot using the ITKplotter</span>
+<span class="n">pl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">PlotterITK</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">smooth_shading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/itk_plotting_sphere.png"><img alt="../_images/itk_plotting_sphere.png" src="../_images/itk_plotting_sphere.png" style="width: 600pt;" /></a>
+<p class="caption"><span class="caption-text">ITKwidgets with pyvista</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>For convenience, figures can also be plotted using the <code class="docutils literal notranslate"><span class="pre">plot_itk</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+
+<span class="c1"># create a mesh and identify some scalars you wish to plot</span>
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Plot using the ITKplotter</span>
+<span class="n">pv</span><span class="o">.</span><span class="n">plot_itk</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">scalars</span><span class="o">=</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional binder examples can be found at:</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.PlotterITK.add_actor" title="pyvista.PlotterITK.add_actor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_actor</span></code></a>(actor)</p></td>
+<td><p>Add an actor to the plotter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.PlotterITK.add_mesh" title="pyvista.PlotterITK.add_mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_mesh</span></code></a>(mesh[, color, scalars, opacity, …])</p></td>
+<td><p>Add a PyVista/VTK mesh or dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.PlotterITK.add_points" title="pyvista.PlotterITK.add_points"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_points</span></code></a>(points[, color])</p></td>
+<td><p>Add points to plotting object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.PlotterITK.show" title="pyvista.PlotterITK.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>([ui_collapsed])</p></td>
+<td><p>Show itkwidgets plotter in cell output.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pyvista.PlotterITK">
+<em class="property">class </em><code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">PlotterITK</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.PlotterITK" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>ITKwidgets plotter.</p>
+<p>Used for plotting interactively within a jupyter notebook.
+Requires <code class="docutils literal notranslate"><span class="pre">itkwidgets&gt;=0.25.2</span></code>.  For installation see:</p>
+<p><a class="reference external" href="https://github.com/InsightSoftwareConsortium/itkwidgets#installation">https://github.com/InsightSoftwareConsortium/itkwidgets#installation</a></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyvista</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mesh</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span> <span class="o">=</span> <span class="n">pyvista</span><span class="o">.</span><span class="n">PlotterITK</span><span class="p">()</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>  
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyvista.PlotterITK.add_actor">
+<code class="sig-name descname">add_actor</code><span class="sig-paren">(</span><em class="sig-param">actor</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.PlotterITK.add_actor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an actor to the plotter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>uinput</strong> (<em>vtk.vtkActor</em>) – vtk actor to be added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.PlotterITK.add_mesh">
+<code class="sig-name descname">add_mesh</code><span class="sig-paren">(</span><em class="sig-param">mesh</em>, <em class="sig-param">color=None</em>, <em class="sig-param">scalars=None</em>, <em class="sig-param">opacity=1.0</em>, <em class="sig-param">smooth_shading=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.PlotterITK.add_mesh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a PyVista/VTK mesh or dataset.</p>
+<p>Adds any PyVista/VTK mesh that itkwidgets can wrap to the
+scene.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mesh</strong> (<a class="reference internal" href="../core/common.html#pyvista.Common" title="pyvista.Common"><em>pyvista.Common</em></a><em> or </em><a class="reference internal" href="../core/composite.html#pyvista.MultiBlock" title="pyvista.MultiBlock"><em>pyvista.MultiBlock</em></a>) – Any PyVista or VTK mesh is supported. Also, any dataset
+that <a class="reference internal" href="../utilities/utilities.html#pyvista.wrap" title="pyvista.wrap"><code class="xref py py-func docutils literal notranslate"><span class="pre">pyvista.wrap()</span></code></a> can handle including NumPy arrays of XYZ
+points.</p></li>
+<li><p><strong>color</strong> (<em>string</em><em> or </em><em>3 item list</em><em>, </em><em>optional</em><em>, </em><em>defaults to white</em>) – Use to make the entire mesh have a single solid color.
+Either a string, RGB list, or hex color string.  For example:
+<code class="docutils literal notranslate"><span class="pre">color='white'</span></code>, <code class="docutils literal notranslate"><span class="pre">color='w'</span></code>, <code class="docutils literal notranslate"><span class="pre">color=[1,</span> <span class="pre">1,</span> <span class="pre">1]</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">color='#FFFFFF'</span></code>. Color will be overridden if scalars are
+specified.</p></li>
+<li><p><strong>scalars</strong> (<em>str</em><em> or </em><em>numpy.ndarray</em><em>, </em><em>optional</em>) – Scalars used to “color” the mesh.  Accepts a string name of an
+array that is present on the mesh or an array equal
+to the number of cells or the number of points in the
+mesh.  Array should be sized as a single vector. If both
+<code class="docutils literal notranslate"><span class="pre">color</span></code> and <code class="docutils literal notranslate"><span class="pre">scalars</span></code> are <code class="docutils literal notranslate"><span class="pre">None</span></code>, then the active scalars are
+used.</p></li>
+<li><p><strong>opacity</strong> (<em>float</em><em>, </em><em>optional</em>) – Opacity of the mesh. If a single float value is given, it will be
+the global opacity of the mesh and uniformly applied everywhere -
+should be between 0 and 1.  Default 1.0</p></li>
+<li><p><strong>smooth_shading</strong> (<em>bool</em><em>, </em><em>optional</em>) – Smooth mesh surface mesh by taking into account surface
+normals.  Surface will appear smoother while sharp edges
+will still look sharp.  Default False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.PlotterITK.add_points">
+<code class="sig-name descname">add_points</code><span class="sig-paren">(</span><em class="sig-param">points</em>, <em class="sig-param">color=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.PlotterITK.add_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add points to plotting object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>points</strong> (<em>np.ndarray</em><em> or </em><a class="reference internal" href="../core/common.html#pyvista.Common" title="pyvista.Common"><em>pyvista.Common</em></a>) – n x 3 numpy array of points or pyvista dataset with points.</p></li>
+<li><p><strong>color</strong> (<em>string</em><em> or </em><em>3 item list</em><em>, </em><em>optional. Color of points</em><em> (</em><em>if visible</em><em>)</em><em></em>) – <p>Either a string, rgb list, or hex color string.  For example:</p>
+<p>color=’white’
+color=’w’
+color=[1, 1, 1]
+color=’#FFFFFF’</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.PlotterITK.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">ui_collapsed=False</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.PlotterITK.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show itkwidgets plotter in cell output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ui_collapsed</strong> (<em>bool</em><em>, </em><em>optional</em>) – Plot with the user interface collapsed.  UI can be enabled
+when plotting.  Default False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>plotter</strong> – ITKwidgets viewer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>itkwidgets.Viewer</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="widgets.html" class="btn btn-neutral float-right" title="Widgets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="qt_plotting.html" class="btn btn-neutral float-left" title="PyVista PyQt Interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,374 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Computation times &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Computation times</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/examples/02-plot/sg_execution_times.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="computation-times">
+<span id="sphx-glr-examples-02-plot-sg-execution-times"></span><h1>Computation times<a class="headerlink" href="#computation-times" title="Permalink to this headline">¶</a></h1>
+<p><strong>14:27.065</strong> total execution time for <strong>examples_02-plot</strong> files:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 83%" />
+<col style="width: 10%" />
+<col style="width: 7%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="depth-peeling.html#sphx-glr-examples-02-plot-depth-peeling-py"><span class="std std-ref">Depth Peeling</span></a> (<code class="docutils literal notranslate"><span class="pre">depth-peeling.py</span></code>)</p></td>
+<td><p>04:25.240</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="orbit.html#sphx-glr-examples-02-plot-orbit-py"><span class="std std-ref">Orbiting</span></a> (<code class="docutils literal notranslate"><span class="pre">orbit.py</span></code>)</p></td>
+<td><p>02:39.637</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="volume.html#sphx-glr-examples-02-plot-volume-py"><span class="std std-ref">Volume Rendering</span></a> (<code class="docutils literal notranslate"><span class="pre">volume.py</span></code>)</p></td>
+<td><p>02:05.481</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="edl.html#sphx-glr-examples-02-plot-edl-py"><span class="std std-ref">Eye Dome Lighting</span></a> (<code class="docutils literal notranslate"><span class="pre">edl.py</span></code>)</p></td>
+<td><p>01:18.940</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="opacity.html#sphx-glr-examples-02-plot-opacity-py"><span class="std std-ref">Plot with Opacity</span></a> (<code class="docutils literal notranslate"><span class="pre">opacity.py</span></code>)</p></td>
+<td><p>00:33.136</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="topo-map.html#sphx-glr-examples-02-plot-topo-map-py"><span class="std std-ref">Topographic Map</span></a> (<code class="docutils literal notranslate"><span class="pre">topo-map.py</span></code>)</p></td>
+<td><p>00:28.239</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="lighting.html#sphx-glr-examples-02-plot-lighting-py"><span class="std std-ref">Lighting Controls</span></a> (<code class="docutils literal notranslate"><span class="pre">lighting.py</span></code>)</p></td>
+<td><p>00:25.685</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="cmap.html#sphx-glr-examples-02-plot-cmap-py"><span class="std std-ref">Colormap Choices</span></a> (<code class="docutils literal notranslate"><span class="pre">cmap.py</span></code>)</p></td>
+<td><p>00:21.564</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="edges.html#sphx-glr-examples-02-plot-edges-py"><span class="std std-ref">Show Edges</span></a> (<code class="docutils literal notranslate"><span class="pre">edges.py</span></code>)</p></td>
+<td><p>00:19.708</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="scalar-bars.html#sphx-glr-examples-02-plot-scalar-bars-py"><span class="std std-ref">Customize Scalar Bars</span></a> (<code class="docutils literal notranslate"><span class="pre">scalar-bars.py</span></code>)</p></td>
+<td><p>00:19.400</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="interpolate-before-map.html#sphx-glr-examples-02-plot-interpolate-before-map-py"><span class="std std-ref">Interpolate Before Mapping</span></a> (<code class="docutils literal notranslate"><span class="pre">interpolate-before-map.py</span></code>)</p></td>
+<td><p>00:13.853</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="texture.html#sphx-glr-examples-02-plot-texture-py"><span class="std std-ref">Applying Textures</span></a> (<code class="docutils literal notranslate"><span class="pre">texture.py</span></code>)</p></td>
+<td><p>00:11.193</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="movie.html#sphx-glr-examples-02-plot-movie-py"><span class="std std-ref">Create a MP4 Movie</span></a> (<code class="docutils literal notranslate"><span class="pre">movie.py</span></code>)</p></td>
+<td><p>00:09.583</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="gif.html#sphx-glr-examples-02-plot-gif-py"><span class="std std-ref">Create a GIF Movie</span></a> (<code class="docutils literal notranslate"><span class="pre">gif.py</span></code>)</p></td>
+<td><p>00:09.086</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="linked.html#sphx-glr-examples-02-plot-linked-py"><span class="std std-ref">Linked Views in Subplots</span></a> (<code class="docutils literal notranslate"><span class="pre">linked.py</span></code>)</p></td>
+<td><p>00:08.836</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="themes.html#sphx-glr-examples-02-plot-themes-py"><span class="std std-ref">Change the Theme</span></a> (<code class="docutils literal notranslate"><span class="pre">themes.py</span></code>)</p></td>
+<td><p>00:07.489</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="multi-window.html#sphx-glr-examples-02-plot-multi-window-py"><span class="std std-ref">Multi-Window Plot</span></a> (<code class="docutils literal notranslate"><span class="pre">multi-window.py</span></code>)</p></td>
+<td><p>00:06.190</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="plot-over-line.html#sphx-glr-examples-02-plot-plot-over-line-py"><span class="std std-ref">Plot Over Line</span></a> (<code class="docutils literal notranslate"><span class="pre">plot-over-line.py</span></code>)</p></td>
+<td><p>00:05.290</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="spherical.html#sphx-glr-examples-02-plot-spherical-py"><span class="std std-ref">Plot data in spherical coordinates</span></a> (<code class="docutils literal notranslate"><span class="pre">spherical.py</span></code>)</p></td>
+<td><p>00:04.765</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="labels.html#sphx-glr-examples-02-plot-labels-py"><span class="std std-ref">Label Points</span></a> (<code class="docutils literal notranslate"><span class="pre">labels.py</span></code>)</p></td>
+<td><p>00:04.267</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="clear.html#sphx-glr-examples-02-plot-clear-py"><span class="std std-ref">Clearing a Mesh or the Entire Plot</span></a> (<code class="docutils literal notranslate"><span class="pre">clear.py</span></code>)</p></td>
+<td><p>00:03.467</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="shading.html#sphx-glr-examples-02-plot-shading-py"><span class="std std-ref">Types of Shading</span></a> (<code class="docutils literal notranslate"><span class="pre">shading.py</span></code>)</p></td>
+<td><p>00:02.718</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="image_depth.html#sphx-glr-examples-02-plot-image-depth-py"><span class="std std-ref">Render a depth image</span></a> (<code class="docutils literal notranslate"><span class="pre">image_depth.py</span></code>)</p></td>
+<td><p>00:02.111</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="screenshot.html#sphx-glr-examples-02-plot-screenshot-py"><span class="std std-ref">Saving Screenshots</span></a> (<code class="docutils literal notranslate"><span class="pre">screenshot.py</span></code>)</p></td>
+<td><p>00:01.189</p></td>
+<td><p>0.0 MB</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,464 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What is a Mesh?" href="what-is-a-mesh.html" />
+    <link rel="prev" title="Authors &amp; Citation" href="../authors.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pypi">PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#anaconda">Anaconda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-developers">Source / Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-installation">Test Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-on-ci-services">Running on CI Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-on-mybinder">Running on MyBinder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-on-remote-servers">Running on Remote Servers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/getting-started/installation.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<span id="install-ref"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>PyVista is supported on Python versions 3.5+, with temporary support for
+Python 2.7 as outlined in <a class="reference external" href="https://github.com/pyvista/pyvista/issues/164">this issue</a>.</p>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>PyVista is built on top of the Visualization Toolkit (VTK) and NumPy - as such,
+the following projects are required dependencies of PyVista:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/vtk/">vtk</a> - PyVista directly inherits types from the VTK library.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/numpy/">numpy</a> - NumPy arrays provide a core foundation for PyVista’s data array access.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/imageio/">imageio</a> - This library is used for saving screenshots.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/appdirs/">appdirs</a> - Data management for our example datasets so users can download tutorials on the fly.</p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/meshio/">meshio</a> - Input/Output for many mesh formats.</p></li>
+</ul>
+</div>
+<div class="section" id="pypi">
+<h2>PyPI<a class="headerlink" href="#pypi" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://pypi.org/project/pyvista/"><img alt="https://img.shields.io/pypi/v/pyvista.svg?logo=python&amp;logoColor=white" src="https://img.shields.io/pypi/v/pyvista.svg?logo=python&amp;logoColor=white" /></a>
+<p>PyVista can be installed from <a class="reference external" href="https://pypi.org/project/pyvista/">PyPI</a>
+using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pyvista</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="anaconda">
+<h2>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://anaconda.org/conda-forge/pyvista"><img alt="https://img.shields.io/conda/vn/conda-forge/pyvista.svg?logo=conda-forge&amp;logoColor=white" src="https://img.shields.io/conda/vn/conda-forge/pyvista.svg?logo=conda-forge&amp;logoColor=white" /></a>
+<p>To install this package with conda run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pyvista</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="optional-dependencies">
+<h2>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The following are a list of optional dependencies and their purpose:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></td>
+<td><p>Using Colormaps</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">PyQt5==5.11.3</span></code></p></td>
+<td><p>Background plotting</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">panel</span></code></p></td>
+<td><p>Interactive notebook rendering</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sphinx_gallery</span></code></p></td>
+<td><p>Capturing PyVista output for docs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">colorcet</span></code></p></td>
+<td><p>Perceptually uniform colormaps</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmocean</span></code></p></td>
+<td><p>Oceanographic colormaps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="source-developers">
+<h2>Source / Developers<a class="headerlink" href="#source-developers" title="Permalink to this headline">¶</a></h2>
+<p>Alternatively, you can install the latest version from GitHub by visiting
+<a class="reference external" href="https://github.com/pyvista/pyvista">PyVista</a>, downloading the source
+(or cloning), and running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">pyvista</span><span class="o">/</span><span class="n">pyvista</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">pyvista</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-installation">
+<h2>Test Installation<a class="headerlink" href="#test-installation" title="Permalink to this headline">¶</a></h2>
+<p>You can test your installation by running an example:</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+<span class="n">examples</span><span class="o">.</span><span class="n">plot_wave</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See other examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvista</span> <span class="kn">import</span> <span class="n">examples</span>
+
+<span class="c1"># list all examples</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">examples</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A more comprehensive testing suite is available after cloning the source
+repository. For details on how to clone and test the PyVista source, please
+see our <a class="reference external" href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md">Contributing Guide</a> and specifically, the <a class="reference external" href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md#testing">Testing</a> section.</p>
+</div>
+</div>
+<div class="section" id="running-on-ci-services">
+<h2>Running on CI Services<a class="headerlink" href="#running-on-ci-services" title="Permalink to this headline">¶</a></h2>
+<p>Please head over to <a class="reference external" href="https://github.com/pyvista/gl-ci-helpers">pyvista/gl-ci-hepers</a> for details on setting up CI
+services like Travis and Azure Pipelines to run PyVista.</p>
+</div>
+<div class="section" id="running-on-mybinder">
+<h2>Running on MyBinder<a class="headerlink" href="#running-on-mybinder" title="Permalink to this headline">¶</a></h2>
+<p>This section is for advanced users that would like to install and use PyVista
+with headless displays on notebook hosting services like <a class="reference external" href="https://mybinder.org">MyBinder</a>.</p>
+<p>Please see <a class="reference external" href="https://github.com/pyvista/cookiecutter-pyvista-binder">this project</a> for a convenient <a class="reference external" href="https://github.com/cookiecutter/cookiecutter">Cookiecutter</a> to get started using
+PyVista on the notebook hosting service <a class="reference external" href="https://mybinder.org">MyBinder</a>.</p>
+<p>To get started, the Docker container will need to have <code class="docutils literal notranslate"><span class="pre">libgl1-mesa-dev</span></code> and
+<code class="docutils literal notranslate"><span class="pre">xvfb</span></code> installed through <code class="docutils literal notranslate"><span class="pre">apt-get</span></code>. For MyBinder, include the following in
+a file called <code class="docutils literal notranslate"><span class="pre">apt.txt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">libgl1</span><span class="o">-</span><span class="n">mesa</span><span class="o">-</span><span class="n">dev</span>
+<span class="n">xvfb</span>
+</pre></div>
+</div>
+<p>Then, you need to configure the headless display, for MyBinder, create a file
+called <code class="docutils literal notranslate"><span class="pre">start</span></code> and include the following set up script that will run every
+time your Docker container is launched:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nb">set</span> -x
+<span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span>:99.0
+<span class="nb">export</span> <span class="nv">PYVISTA_OFF_SCREEN</span><span class="o">=</span><span class="nb">true</span>
+<span class="nb">export</span> <span class="nv">PYVISTA_USE_PANEL</span><span class="o">=</span><span class="nb">true</span>
+which Xvfb
+Xvfb :99 -screen <span class="m">0</span> 1024x768x24 &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+sleep <span class="m">3</span>
+<span class="nb">set</span> +x
+<span class="nb">exec</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>And that’s it! Include PyVista in your Python requirements and get to
+visualizing your data! If you need more help than this on setting up PyVista
+for these types of services, hop on Slack and chat with the developers or take
+a look at <a class="reference external" href="https://github.com/OpenGeoVis/PVGeo-Examples">this repository</a> that is currently using PyVista on MyBinder.</p>
+</div>
+<div class="section" id="running-on-remote-servers">
+<h2>Running on Remote Servers<a class="headerlink" href="#running-on-remote-servers" title="Permalink to this headline">¶</a></h2>
+<p>Using PyVista on remote servers requires similar setup steps as in the above
+Docker case. As an example, here are the complete steps to use PyVista on AWS
+EC2 Ubuntu 18.04 LTS (<code class="docutils literal notranslate"><span class="pre">ami-0a313d6098716f372</span></code> in <code class="docutils literal notranslate"><span class="pre">us-east-1</span></code>).
+Other servers would work similarly.</p>
+<p>After logging into the remote server, install Miniconda and related packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p miniconda
+<span class="nb">echo</span> <span class="s1">&#39;. $HOME/miniconda/etc/profile.d/conda.sh&#39;</span> &gt;&gt; ~/.bashrc <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/.bashrc
+conda create --name vtk_env <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
+conda activate vtk_env
+conda install nodejs  <span class="c1"># required when importing pyvista in Jupyter</span>
+pip install jupyter pyvista panel
+
+<span class="c1"># To avoid &quot;ModuleNotFoundError: No module named &#39;vtkOpenGLKitPython&#39; &quot; when importing vtk</span>
+<span class="c1"># https://stackoverflow.com/q/32389599</span>
+<span class="c1"># https://askubuntu.com/q/629692</span>
+sudo apt update <span class="o">&amp;&amp;</span> sudo apt install python-qt4 libgl1-mesa-glx
+</pre></div>
+</div>
+<p>Then, configure the headless display:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install xvfb
+<span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span>:99.0
+<span class="nb">export</span> <span class="nv">PYVISTA_OFF_SCREEN</span><span class="o">=</span><span class="nb">true</span>
+<span class="nb">export</span> <span class="nv">PYVISTA_USE_PANEL</span><span class="o">=</span><span class="nb">true</span>
+Xvfb :99 -screen <span class="m">0</span> 1024x768x24 &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+sleep <span class="m">3</span>
+</pre></div>
+</div>
+<p>Reconnect to the server with port-forwarding, and start Jupyter:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh -i <span class="s2">&quot;your-ssh-key&quot;</span> your-user-name@your-server-ip -L <span class="m">8888</span>:localhost:8888
+conda activate vtk_env
+jupyter notebook --NotebookApp.token<span class="o">=</span><span class="s1">&#39;&#39;</span> --no-browser --port<span class="o">=</span><span class="m">8888</span>
+</pre></div>
+</div>
+<p>Visit <code class="docutils literal notranslate"><span class="pre">localhost:8888</span></code> in the web browser.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="what-is-a-mesh.html" class="btn btn-neutral float-right" title="What is a Mesh?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../authors.html" class="btn btn-neutral float-left" title="Authors &amp; Citation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

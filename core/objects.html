@@ -1,0 +1,633 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Objects &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Datasets" href="common.html" />
+    <link rel="prev" title="Core API" href="index.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Core API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#table">Table</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="common.html">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="points.html">Point Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="point-grids.html">Point-Based Grids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grids.html">Gridded Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composite.html">Composite Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Filters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Core API</a> &raquo;</li>
+        
+      <li>Objects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/core/objects.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="objects">
+<h1>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#pyvista.DataObject" title="pyvista.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.DataObject</span></code></a> class is a set of common methods and attributes
+for all PyVista types. These objects have no spatial reference, but simply
+hold data.</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.field_arrays" title="pyvista.DataObject.field_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">field_arrays</span></code></a></p></td>
+<td><p>Return all field arrays.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.DataObject.memory_address" title="pyvista.DataObject.memory_address"><code class="xref py py-obj docutils literal notranslate"><span class="pre">memory_address</span></code></a></p></td>
+<td><p>Get address of the underlying C++ object in format ‘Addr=%p’.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.add_field_array" title="pyvista.DataObject.add_field_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_field_array</span></code></a>(scalars, name[, deep])</p></td>
+<td><p>Add a field array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.DataObject.clear_field_arrays" title="pyvista.DataObject.clear_field_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear_field_arrays</span></code></a>()</p></td>
+<td><p>Remove all field arrays.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.copy" title="pyvista.DataObject.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>([deep])</p></td>
+<td><p>Return a copy of the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.DataObject.copy_meta_from" title="pyvista.DataObject.copy_meta_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_meta_from</span></code></a>(ido)</p></td>
+<td><p>Copy pyvista meta data onto this object from another object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.deep_copy" title="pyvista.DataObject.deep_copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deep_copy</span></code></a>(to_copy)</p></td>
+<td><p>Overwrite this mesh with the given mesh as a deep copy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.DataObject.get_data_range" title="pyvista.DataObject.get_data_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data_range</span></code></a>([arr, preference])</p></td>
+<td><p>Get the non-NaN min and max of a named array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.head" title="pyvista.DataObject.head"><code class="xref py py-obj docutils literal notranslate"><span class="pre">head</span></code></a>([display, html])</p></td>
+<td><p>Return the header stats of this dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.DataObject.save" title="pyvista.DataObject.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(filename[, binary])</p></td>
+<td><p>Write this mesh to a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.DataObject.shallow_copy" title="pyvista.DataObject.shallow_copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shallow_copy</span></code></a>(to_copy)</p></td>
+<td><p>Shallow copy the given mesh to this mesh.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pyvista.DataObject">
+<em class="property">class </em><code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">DataObject</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Methods common to all wrapped data objects.</p>
+<dl class="method">
+<dt id="pyvista.DataObject.add_field_array">
+<code class="sig-name descname">add_field_array</code><span class="sig-paren">(</span><em class="sig-param">scalars</em>, <em class="sig-param">name</em>, <em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.add_field_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a field array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.clear_field_arrays">
+<code class="sig-name descname">clear_field_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.clear_field_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove all field arrays.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">deep=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deep</strong> (<em>bool</em><em>, </em><em>optional</em>) – When True makes a full copy of the object.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>newobject</strong> – Deep or shallow copy of the input.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>same as input</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.copy_meta_from">
+<code class="sig-name descname">copy_meta_from</code><span class="sig-paren">(</span><em class="sig-param">ido</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.copy_meta_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy pyvista meta data onto this object from another object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.deep_copy">
+<code class="sig-name descname">deep_copy</code><span class="sig-paren">(</span><em class="sig-param">to_copy</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.deep_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overwrite this mesh with the given mesh as a deep copy.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.field_arrays">
+<em class="property">property </em><code class="sig-name descname">field_arrays</code><a class="headerlink" href="#pyvista.DataObject.field_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all field arrays.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.get_data_range">
+<code class="sig-name descname">get_data_range</code><span class="sig-paren">(</span><em class="sig-param">arr=None</em>, <em class="sig-param">preference='field'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.get_data_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the non-NaN min and max of a named array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>str</em><em>, </em><em>np.ndarray</em><em>, </em><em>optional</em>) – The name of the array to get the range. If None, the
+active scalar is used</p></li>
+<li><p><strong>preference</strong> (<em>str</em><em>, </em><em>optional</em>) – When scalars is specified, this is the preferred array type
+to search for in the dataset.  Must be either <code class="docutils literal notranslate"><span class="pre">'point'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'cell'</span></code>, or <code class="docutils literal notranslate"><span class="pre">'field'</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.head">
+<code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">display=True</em>, <em class="sig-param">html=None</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the header stats of this dataset.</p>
+<p>If in IPython, this will be formatted to HTML. Otherwise returns a console friendly string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.memory_address">
+<em class="property">property </em><code class="sig-name descname">memory_address</code><a class="headerlink" href="#pyvista.DataObject.memory_address" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get address of the underlying C++ object in format ‘Addr=%p’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">filename</em>, <em class="sig-param">binary=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write this mesh to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Filename of mesh to be written.  File type is inferred from
+the extension of the filename unless overridden with
+ftype.</p></li>
+<li><p><strong>binary</strong> (<em>bool</em><em>, </em><em>optional</em>) – Writes the file as binary when True and ASCII when False.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Binary files write much faster than ASCII and have a smaller
+file size.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.DataObject.shallow_copy">
+<code class="sig-name descname">shallow_copy</code><span class="sig-paren">(</span><em class="sig-param">to_copy</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.DataObject.shallow_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shallow copy the given mesh to this mesh.</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="table">
+<h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
+<p>The table class is a non-spatially referenced data object that can be used on
+VTK pipelines and holds arrays of data.</p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.n_arrays" title="pyvista.Table.n_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_arrays</span></code></a></p></td>
+<td><p>Return the number of columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.n_columns" title="pyvista.Table.n_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_columns</span></code></a></p></td>
+<td><p>Return the number of columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.n_rows" title="pyvista.Table.n_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">n_rows</span></code></a></p></td>
+<td><p>Return the number of rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.row_arrays" title="pyvista.Table.row_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_arrays</span></code></a></p></td>
+<td><p>Return the all row arrays.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.get" title="pyvista.Table.get"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code></a>(index)</p></td>
+<td><p>Get an array by its name.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.get_data_range" title="pyvista.Table.get_data_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data_range</span></code></a>([arr, preference])</p></td>
+<td><p>Get the non-NaN min and max of a named array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.items" title="pyvista.Table.items"><code class="xref py py-obj docutils literal notranslate"><span class="pre">items</span></code></a>()</p></td>
+<td><p>Return the table items.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.keys" title="pyvista.Table.keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keys</span></code></a>()</p></td>
+<td><p>Return the table keys.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.next" title="pyvista.Table.next"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next</span></code></a>()</p></td>
+<td><p>Get the next block from the iterator.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.pop" title="pyvista.Table.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop</span></code></a>(name)</p></td>
+<td><p>Pops off an array by the specified name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.save" title="pyvista.Table.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Save the table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.to_pandas" title="pyvista.Table.to_pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pandas</span></code></a>()</p></td>
+<td><p>Create a Pandas DataFrame from this Table.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvista.Table.update" title="pyvista.Table.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(data)</p></td>
+<td><p>Set the table data.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvista.Table.values" title="pyvista.Table.values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">values</span></code></a>()</p></td>
+<td><p>Return the table values.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="pyvista.Table">
+<em class="property">class </em><code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">Table</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">vtkCommonDataModelPython.vtkTable</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">pyvista.core.common.DataObject</span></code></p>
+<p>Wrapper for the <code class="docutils literal notranslate"><span class="pre">vtkTable</span></code> class.</p>
+<p>Create by passing a 2D NumPy array of shape (<code class="docutils literal notranslate"><span class="pre">n_rows</span></code> by <code class="docutils literal notranslate"><span class="pre">n_columns</span></code>)
+or from a dictionary containing NumPy arrays.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">arrays</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">arrays</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="pyvista.Table.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an array by its name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.get_data_range">
+<code class="sig-name descname">get_data_range</code><span class="sig-paren">(</span><em class="sig-param">arr=None</em>, <em class="sig-param">preference='row'</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.get_data_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the non-NaN min and max of a named array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<em>str</em><em>, </em><em>np.ndarray</em><em>, </em><em>optional</em>) – The name of the array to get the range. If None, the active scalar
+is used</p></li>
+<li><p><strong>preference</strong> (<em>str</em><em>, </em><em>optional</em>) – When scalars is specified, this is the preferred array type
+to search for in the dataset.  Must be either <code class="docutils literal notranslate"><span class="pre">'row'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'field'</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the table items.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the table keys.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.n_arrays">
+<em class="property">property </em><code class="sig-name descname">n_arrays</code><a class="headerlink" href="#pyvista.Table.n_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of columns.</p>
+<p>Alias for: <code class="docutils literal notranslate"><span class="pre">n_columns</span></code>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.n_columns">
+<em class="property">property </em><code class="sig-name descname">n_columns</code><a class="headerlink" href="#pyvista.Table.n_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of columns.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.n_rows">
+<em class="property">property </em><code class="sig-name descname">n_rows</code><a class="headerlink" href="#pyvista.Table.n_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of rows.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the next block from the iterator.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.pop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pops off an array by the specified name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.row_arrays">
+<em class="property">property </em><code class="sig-name descname">row_arrays</code><a class="headerlink" href="#pyvista.Table.row_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the all row arrays.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.save">
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.to_pandas">
+<code class="sig-name descname">to_pandas</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.to_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Pandas DataFrame from this Table.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the table data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyvista.Table.values">
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.Table.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the table values.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="common.html" class="btn btn-neutral float-right" title="Datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Core API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

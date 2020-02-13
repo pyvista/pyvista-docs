@@ -1,0 +1,472 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Interpolate Before Mapping &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Label Points" href="labels.html" />
+    <link rel="prev" title="Render a depth image" href="image_depth.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Quick Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#mesh-creation">Mesh Creation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#filtering">Filtering</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#plotting">Plotting</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="clear.html">Clearing a Mesh or the Entire Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cmap.html">Colormap Choices</a></li>
+<li class="toctree-l3"><a class="reference internal" href="depth-peeling.html">Depth Peeling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edges.html">Show Edges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="edl.html">Eye Dome Lighting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gif.html">Create a GIF Movie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image_depth.html">Render a depth image</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Interpolate Before Mapping</a></li>
+<li class="toctree-l3"><a class="reference internal" href="labels.html">Label Points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lighting.html">Lighting Controls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linked.html">Linked Views in Subplots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="movie.html">Create a MP4 Movie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-window.html">Multi-Window Plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="opacity.html">Plot with Opacity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="orbit.html">Orbiting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot-over-line.html">Plot Over Line</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scalar-bars.html">Customize Scalar Bars</a></li>
+<li class="toctree-l3"><a class="reference internal" href="screenshot.html">Saving Screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="shading.html">Types of Shading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spherical.html">Plot data in spherical coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="texture.html">Applying Textures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="themes.html">Change the Theme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="topo-map.html">Topographic Map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="volume.html">Volume Rendering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#advanced">Advanced</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utilities/index.html">Utilities</a></li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Quick Examples</a> &raquo;</li>
+        
+      <li>Interpolate Before Mapping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/examples/02-plot/interpolate-before-map.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-examples-02-plot-interpolate-before-map-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="interpolate-before-mapping">
+<span id="sphx-glr-examples-02-plot-interpolate-before-map-py"></span><h1>Interpolate Before Mapping<a class="headerlink" href="#interpolate-before-mapping" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">add_mesh</span></code> function has an <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> argument - this
+affects the way scalar data is visualized with colors.
+The effect can of this can vary depending on the dataset’s topology and the
+chosen colormap.</p>
+<p>This example serves to demo the difference and why we’ve chosen to enable this
+by default.</p>
+<p>For more details, please see <a class="reference external" href="https://blog.kitware.com/what-is-interpolatescalarsbeforemapping-in-vtk/">this blog post</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_number = 4</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+</pre></div>
+</div>
+<p>Meshes are colored by the data on their nodes or cells - when coloring a mesh
+by data on its nodes, the values must be interpolated across the faces of
+cells. The process by which those scalars are interpolated is critical.
+If the <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> is left off, the color mapping occurs at
+polygon points and  colors are interpolated, which is generally less accurate
+whereas if the <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> is on, then the scalars will be
+interpolated across the topology of the dataset which is more accurate.</p>
+<p>To summarize, when <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> is off, the colors are
+interpolated after rendering and when <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> is on, the
+scalars are interpolated across the mesh and those values are mapped to
+colors.</p>
+<p>So lets take a look at the difference:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a cylider which has cells with a wide spread</span>
+<span class="n">cyl</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Cylinder</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">elevation</span><span class="p">()</span>
+
+<span class="c1"># Common display argument to make sure all else is constant</span>
+<span class="n">dargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">cyl</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;Elevation - not interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">cyl</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;Elevation - interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">link_views</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">camera_position</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mf">1.67</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.10</span><span class="p">,</span> <span class="mf">2.06</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">)]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_interpolate-before-map_001.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_interpolate-before-map_001.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(-1.67, -5.1, 2.06),
+ (0.0, 0.0, 0.0),
+ (0.0, 0.36966744887673536, 0.9291641282577402)]
+</pre></div>
+</div>
+<p>Shown in the figure above, when not interpolating the scalars before mapping,
+the colors (RGB values, not scalars) are interpolated between the vertices by
+the underlying graphics library (OpenGL), and the colors shown are not
+accurate.</p>
+<p>The same interpolation effect occurs for wireframe visualization too:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Common display argument to make sure all else is constant</span>
+<span class="n">dargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;Elevation&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">style</span><span class="o">=</span><span class="s1">&#39;wireframe&#39;</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">cyl</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;Elevation - not interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">cyl</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;Elevation - interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">link_views</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">camera_position</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mf">1.67</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.10</span><span class="p">,</span> <span class="mf">2.06</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                     <span class="p">(</span><span class="mf">0.00</span><span class="p">,</span> <span class="mf">0.37</span><span class="p">,</span> <span class="mf">0.93</span><span class="p">)]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_interpolate-before-map_002.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_interpolate-before-map_002.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(-1.67, -5.1, 2.06),
+ (0.0, 0.0, 0.0),
+ (0.0, 0.36966744887673536, 0.9291641282577402)]
+</pre></div>
+</div>
+<p>The cylider mesh above is a great example dataset for this as it has a wide
+spread between the vertices (points are only at the top and bottom of the
+cylinder) which means high surface are of the mesh has to be interpolated.</p>
+<p>However, most meshes don’t have such a wide spread and the effects of
+color interpolating are harder to notice. Let’s take a look at a wavelet
+example and try to figure out how the <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> option
+affects its rendering.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wavelet</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Wavelet</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="c1"># Common display argument to make sure all else is constant</span>
+<span class="n">dargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;RTData&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">wavelet</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;RTData - not interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">wavelet</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;RTData - interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">link_views</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">camera_position</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">55.</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+                     <span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                     <span class="p">(</span><span class="o">-</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09</span><span class="p">)]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_interpolate-before-map_003.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_interpolate-before-map_003.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(55.0, 16.0, 31.0),
+ (-5.0, 0.0, 0.0),
+ (-0.22028655891110546, 0.971263464289874, -0.09011722864545223)]
+</pre></div>
+</div>
+<p>This time is pretty difficult to notice the differences - they are there,
+subtle, but present. The differences become more apperant when we decrease
+the number of colors in colormap.
+Let’s take a look at the differences when using eight discrete colors via
+the <code class="docutils literal notranslate"><span class="pre">n_colors</span></code> argument:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">scalars</span><span class="o">=</span><span class="s1">&#39;RTData&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rainbow&#39;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_colors</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">wavelet</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;RTData - not interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">wavelet</span><span class="p">,</span> <span class="n">interpolate_before_map</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+           <span class="n">stitle</span><span class="o">=</span><span class="s1">&#39;RTData - interpolated&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">dargs</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">link_views</span><span class="p">()</span>
+<span class="n">p</span><span class="o">.</span><span class="n">camera_position</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">55.</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+                     <span class="p">(</span><span class="o">-</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                     <span class="p">(</span><span class="o">-</span><span class="mf">0.22</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09</span><span class="p">)]</span>
+<span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/sphx_glr_interpolate-before-map_004.png" class="sphx-glr-single-img" src="../../_images/sphx_glr_interpolate-before-map_004.png" />
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(55.0, 16.0, 31.0),
+ (-5.0, 0.0, 0.0),
+ (-0.22028655891110546, 0.971263464289874, -0.09011722864545223)]
+</pre></div>
+</div>
+<p>Left, <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> OFF.  Right, <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code> ON.</p>
+<p>Now that is much more compelling! On the right, the contours of the scalar
+field are visible, but on the left, the contours are obscured due to the color
+interpolation by OpenGL. In both cases, the colors at the vertices are the
+same, the difference is how color is assigned between the vertices.</p>
+<p>In our opinion, color interpolation is not a preferred default for scientific
+visualization and is why we have chosen to set the <code class="docutils literal notranslate"><span class="pre">interpolate_before_map</span></code>
+flag to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  13.853 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-02-plot-interpolate-before-map-py">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/91cd0be2efaed168b131785c026dee9f/interpolate-before-map.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">interpolate-before-map.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/0bf1c8f3563829244ab0f63ecd8d0e56/interpolate-before-map.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">interpolate-before-map.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="labels.html" class="btn btn-neutral float-right" title="Label Points" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="image_depth.html" class="btn btn-neutral float-left" title="Render a depth image" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

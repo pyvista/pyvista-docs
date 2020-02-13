@@ -1,0 +1,823 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parametric Objects &mdash; PyVista 0.23.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script >var copybuttonSkipText = '>>> ';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="General Utilities" href="utilities.html" />
+    <link rel="prev" title="Geometric Objects" href="geometric.html" />
+ 
+
+<meta name="description" content="3D plotting and mesh analysis through a streamlined interface for the Visualization Toolkit (VTK)">
+<meta name="author" content="PyVista Developers">
+<meta name="keywords" content="python, 3D, visualization, plotting, mesh, meshviewer, vtk, open-source">
+
+<!-- this contains PyVista's Google analytics code - please don't copy/paste our tracking ID -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+  ga('create', 'UA-140243896-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/pyvista_logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.23.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+    
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../why.html">Why PyVista?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors &amp; Citation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/what-is-a-mesh.html">What is a Mesh?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started/simple.html">Basic API Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Quick Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../external_examples.html">External Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../core/index.html">Core API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotting/index.html">Plotting</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Utilities</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="geometric.html">Geometric Objects</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parametric Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">General Utilities</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+    
+        <p class="caption">
+            <span class="caption-text">
+            
+                Getting Connected
+            
+            </span>
+        </p>
+        <ul>
+            
+                <li class="toctree-l1"><a href="http://slack.pyvista.org"><i class="fa fa-slack fa-fw"></i> Slack Community</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista-support"><i class="fa fa-comment fa-fw"></i> Support</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista"><i class="fa fa-github fa-fw"></i> Source Code</a></li>
+            
+                <li class="toctree-l1"><a href="https://github.com/pyvista/pyvista/blob/master/CONTRIBUTING.md"><i class="fa fa-gavel fa-fw"></i> Contributing</a></li>
+            
+                <li class="toctree-l1"><a href="https://doi.org/10.21105/joss.01450"><i class="fa fa-file-text fa-fw"></i> The Paper</a></li>
+            
+        </ul>
+    
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVista</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Utilities</a> &raquo;</li>
+        
+      <li>Parametric Objects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/pyvista/pyvista/blob/master/docs/utilities/parametric.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parametric-objects">
+<h1>Parametric Objects<a class="headerlink" href="#parametric-objects" title="Permalink to this headline">¶</a></h1>
+<p>The following functions can be used to create parametric surfaces.  To
+see what these functions create, check out the example: <a class="reference internal" href="../examples/00-load/create-parametric-geometric-objects.html#ref-parametric-example"><span class="std std-ref">Parametric Geometric Objects</span></a>.</p>
+<dl class="function">
+<dt id="pyvista.ParametricBohemianDome">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricBohemianDome</code><span class="sig-paren">(</span><em class="sig-param">a=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricBohemianDome" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Bohemian dome.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>double</em><em>, </em><em>optional</em>) – Construct a Bohemian dome surface with the following parameters:</p></li>
+<li><p><strong>double</strong><strong>)</strong><strong>;</strong> (<em>vtkGetMacro</em><em>(</em><em>A</em><em>,</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricBohemianDome surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricBohemianDome mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricBohemianDome()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricBour">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricBour</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricBour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Bour’s minimal surface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>surf</strong> – ParametricBour surface</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricBour mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricBour()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricBoy">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricBoy</code><span class="sig-paren">(</span><em class="sig-param">zscale=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricBoy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Boy’s surface.</p>
+<p>ParametricBoy generates Boy’s surface.
+This is a Model of the projective plane without singularities.
+It was found by Werner Boy on assignment from David Hilbert.</p>
+<p>For further information about this surface, please consult the
+technical description “Parametric surfaces” in the
+“VTK Technical Documents” section in the VTK.org web pages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>zscale</strong> (<em>double</em><em>, </em><em>optional</em>) – The scale factor for the z-coordinate.
+Default is 18, giving a nice shape.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricBoy surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricBoy mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricBoy()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricDini">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricDini</code><span class="sig-paren">(</span><em class="sig-param">a=None</em>, <em class="sig-param">b=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricDini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Dini’s surface.</p>
+<p>ParametricDini generates Dini’s surface.  Dini’s surface is a
+surface that possesses constant negative Gaussian curvature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>double</em><em>, </em><em>optional</em>) – The scale factor.
+See the definition in Parametric surfaces referred to above.
+Default is 1.</p></li>
+<li><p><strong>b</strong> (<em>double</em><em>, </em><em>optional</em>) – The scale factor.
+See the definition in Parametric surfaces referred to above.
+Default is 0.2</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricDini surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricDini mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricDini()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricEllipsoid">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricEllipsoid</code><span class="sig-paren">(</span><em class="sig-param">xradius=None</em>, <em class="sig-param">yradius=None</em>, <em class="sig-param">zradius=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricEllipsoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate an ellipsoid.</p>
+<p>ParametricEllipsoid generates an ellipsoid.  If all the radii are
+the same, we have a sphere.  An oblate spheroid occurs if RadiusX
+= RadiusY &gt; RadiusZ.  Here the Z-axis forms the symmetry axis. To
+a first approximation, this is the shape of the earth.  A prolate
+spheroid occurs if RadiusX = RadiusY &lt; RadiusZ.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the x-axis. Default is 1.</p></li>
+<li><p><strong>yradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the y-axis. Default is 1.</p></li>
+<li><p><strong>zradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the z-axis. Default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricEllipsoid surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricEllipsoid mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricEllipsoid()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricEnneper">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricEnneper</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricEnneper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Enneper’s surface.</p>
+<p>ParametricEnneper generates Enneper’s surface.
+Enneper’s surface is a a self-intersecting minimal surface
+possessing constant negative Gaussian curvature</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>surf</strong> – ParametricEnneper surface</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricEnneper mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricEnneper()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricFigure8Klein">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricFigure8Klein</code><span class="sig-paren">(</span><em class="sig-param">radius=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricFigure8Klein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a figure-8 Klein bottle.</p>
+<p>ParametricFigure8Klein generates a figure-8 Klein bottle.  A Klein
+bottle is a closed surface with no interior and only one surface.
+It is unrealisable in 3 dimensions without intersecting surfaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>radius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius of the bottle. Default is 1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricFigure8Klein surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricFigure8Klein mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricFigure8Klein()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricHenneberg">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricHenneberg</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricHenneberg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Henneberg’s minimal surface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>surf</strong> – ParametricHenneberg surface</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricHenneberg mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricHenneberg()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricKlein">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricKlein</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricKlein" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a “classical” representation of a Klein bottle.</p>
+<p>ParametricKlein generates a “classical” representation of a Klein
+bottle.  A Klein bottle is a closed surface with no interior and only one
+surface.  It is unrealisable in 3 dimensions without intersecting
+surfaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>surf</strong> – ParametricKlein surface</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricKlein mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricKlein()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricKuen">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricKuen</code><span class="sig-paren">(</span><em class="sig-param">deltav0=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricKuen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Kuens’ surface.</p>
+<p>ParametricKuen generates Kuens’ surface. This surface has a constant
+negative gaussian curvature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>deltav0</strong> (<em>double</em><em>, </em><em>optional</em>) – The value to use when V == 0.
+Default is 0.05, giving the best appearance with the default settings.
+Setting it to a value less than 0.05 extrapolates the surface
+towards a pole in the -z direction.
+Setting it to 0 retains the pole whose z-value is -inf.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricKuen surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricKuen mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricKuen()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricMobius">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricMobius</code><span class="sig-paren">(</span><em class="sig-param">radius=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricMobius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a Mobius strip.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>radius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius of the Mobius strip. Default is 1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricMobius surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricMobius mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricMobius()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricPluckerConoid">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricPluckerConoid</code><span class="sig-paren">(</span><em class="sig-param">n=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricPluckerConoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Plucker’s conoid surface.</p>
+<p>ParametricPluckerConoid generates Plucker’s conoid surface parametrically.
+Plucker’s conoid is a ruled surface, named after Julius Plucker. It is
+possible to set the number of folds in this class via the parameter ‘N’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em><em>, </em><em>optional</em>) – This is the number of folds in the conoid.</p></li>
+<li><p><strong>int</strong><strong>)</strong><strong>;</strong> (<em>vtkGetMacro</em><em>(</em><em>N</em><em>,</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricPluckerConoid surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricPluckerConoid mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricPluckerConoid()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricPseudosphere">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricPseudosphere</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricPseudosphere" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a pseudosphere.</p>
+<p>ParametricPseudosphere generates a parametric pseudosphere. The
+pseudosphere is generated as a surface of revolution of the
+tractrix about it’s asymptote, and is a surface of constant
+negative Gaussian curvature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>surf</strong> – ParametricPseudosphere surface</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricPseudosphere mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricPseudosphere()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricRandomHills">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricRandomHills</code><span class="sig-paren">(</span><em class="sig-param">numberofhills=None</em>, <em class="sig-param">hillxvariance=None</em>, <em class="sig-param">hillyvariance=None</em>, <em class="sig-param">hillamplitude=None</em>, <em class="sig-param">randomseed=None</em>, <em class="sig-param">xvariancescalefactor=None</em>, <em class="sig-param">yvariancescalefactor=None</em>, <em class="sig-param">amplitudescalefactor=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricRandomHills" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a surface covered with randomly placed hills.</p>
+<p>ParametricRandomHills generates a surface covered with randomly
+placed hills. Hills will vary in shape and height since the
+presence of nearby hills will contribute to the shape and height
+of a given hill.  An option is provided for placing hills on a
+regular grid on the surface.  In this case the hills will all have
+the same shape and height.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numberofhills</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of hills.
+Default is 30.</p></li>
+<li><p><strong>hillxvariance</strong> (<em>double</em><em>, </em><em>optional</em>) – The hill variance in the x-direction.
+Default is 2.5.</p></li>
+<li><p><strong>hillyvariance</strong> (<em>double</em><em>, </em><em>optional</em>) – The hill variance in the y-direction.
+Default is 2.5.</p></li>
+<li><p><strong>hillamplitude</strong> (<em>double</em><em>, </em><em>optional</em>) – The hill amplitude (height).
+Default is 2.</p></li>
+<li><p><strong>randomseed</strong> (<em>int</em><em>, </em><em>optional</em>) – The Seed for the random number generator,
+a value of 1 will initialize the random number generator,
+a negative value will initialize it with the system time.
+Default is 1.</p></li>
+<li><p><strong>xvariancescalefactor</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the variance in the x-direction.
+Default is 13.</p></li>
+<li><p><strong>yvariancescalefactor</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the variance in the y-direction.
+Default is 13.</p></li>
+<li><p><strong>amplitudescalefactor</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the amplitude.
+Default is 13.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricRandomHills surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricRandomHills mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricRandomHills()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricRoman">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricRoman</code><span class="sig-paren">(</span><em class="sig-param">radius=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricRoman" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate Steiner’s Roman Surface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>radius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius. Default is 1.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricRoman surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricRoman mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricRoman()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricSuperEllipsoid">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricSuperEllipsoid</code><span class="sig-paren">(</span><em class="sig-param">xradius=None</em>, <em class="sig-param">yradius=None</em>, <em class="sig-param">zradius=None</em>, <em class="sig-param">n1=None</em>, <em class="sig-param">n2=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricSuperEllipsoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a superellipsoid.</p>
+<p>ParametricSuperEllipsoid generates a superellipsoid.  A superellipsoid
+is a versatile primitive that is controlled by two parameters n1 and
+n2. As special cases it can represent a sphere, square box, and closed
+cylindrical can.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the x-axis. Default is 1.</p></li>
+<li><p><strong>yradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the y-axis. Default is 1.</p></li>
+<li><p><strong>zradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the z-axis. Default is 1.</p></li>
+<li><p><strong>n1</strong> (<em>double</em><em>, </em><em>optional</em>) – The “squareness” parameter in the z axis.  Default is 1.</p></li>
+<li><p><strong>n2</strong> (<em>double</em><em>, </em><em>optional</em>) – The “squareness” parameter in the x-y plane. Default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricSuperEllipsoid surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricSuperEllipsoid mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricSuperEllipsoid()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricSuperToroid">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricSuperToroid</code><span class="sig-paren">(</span><em class="sig-param">ringradius=None</em>, <em class="sig-param">crosssectionradius=None</em>, <em class="sig-param">xradius=None</em>, <em class="sig-param">yradius=None</em>, <em class="sig-param">zradius=None</em>, <em class="sig-param">n1=None</em>, <em class="sig-param">n2=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricSuperToroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a supertoroid.</p>
+<p>ParametricSuperToroid generates a supertoroid.  Essentially a
+supertoroid is a torus with the sine and cosine terms raised to a power.
+A supertoroid is a versatile primitive that is controlled by four
+parameters r0, r1, n1 and n2. r0, r1 determine the type of torus whilst
+the value of n1 determines the shape of the torus ring and n2 determines
+the shape of the cross section of the ring. It is the different values of
+these powers which give rise to a family of 3D shapes that are all
+basically toroidal in shape.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ringradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius from the center to the middle of the ring of the
+supertoroid. Default is 1.</p></li>
+<li><p><strong>crosssectionradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius of the cross section of ring of the supertoroid.
+Default = 0.5.</p></li>
+<li><p><strong>xradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the x-axis. Default is 1.</p></li>
+<li><p><strong>yradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the y-axis. Default is 1.</p></li>
+<li><p><strong>zradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The scaling factor for the z-axis. Default is 1.</p></li>
+<li><p><strong>n1</strong> (<em>double</em><em>, </em><em>optional</em>) – The shape of the torus ring.  Default is 1.</p></li>
+<li><p><strong>n2</strong> (<em>double</em><em>, </em><em>optional</em>) – The shape of the cross section of the ring. Default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricSuperToroid surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricSuperToroid mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricSuperToroid()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.ParametricTorus">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">ParametricTorus</code><span class="sig-paren">(</span><em class="sig-param">ringradius=None</em>, <em class="sig-param">crosssectionradius=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.ParametricTorus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a torus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ringradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius from the center to the middle of the ring of the
+torus. Default is 1.0.</p></li>
+<li><p><strong>crosssectionradius</strong> (<em>double</em><em>, </em><em>optional</em>) – The radius of the cross section of ring of the torus. Default is 0.5.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>surf</strong> – ParametricTorus surface</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../core/points.html#pyvista.PolyData" title="pyvista.PolyData">pyvista.PolyData</a></p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Create a ParametricTorus mesh
+&gt;&gt;&gt; import pyvista
+&gt;&gt;&gt; mesh = pyvista.ParametricTorus()
+&gt;&gt;&gt; mesh.plot(color=’w’, smooth_shading=True)  # doctest:+SKIP</p>
+</dd></dl>
+
+<p>These functions support building parametric surfaces:</p>
+<dl class="function">
+<dt id="pyvista.parametric_keywords">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">parametric_keywords</code><span class="sig-paren">(</span><em class="sig-param">parametric_function</em>, <em class="sig-param">min_u=0</em>, <em class="sig-param">max_u=6.283185307179586</em>, <em class="sig-param">min_v=0.0</em>, <em class="sig-param">max_v=6.283185307179586</em>, <em class="sig-param">join_u=False</em>, <em class="sig-param">join_v=False</em>, <em class="sig-param">twist_u=False</em>, <em class="sig-param">twist_v=False</em>, <em class="sig-param">clockwise=True</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.parametric_keywords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply keyword arguments to a parametric function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_u</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum u-value.</p></li>
+<li><p><strong>max_u</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum u-value.</p></li>
+<li><p><strong>min_v</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum v-value.</p></li>
+<li><p><strong>max_v</strong> (<em>float</em><em>, </em><em>optional</em>) – The maximum v-value.</p></li>
+<li><p><strong>join_u</strong> (<em>bool</em><em>, </em><em>optional</em>) – Joins the first triangle strip to the last one with a twist in
+the u direction.</p></li>
+<li><p><strong>join_v</strong> (<em>bool</em><em>, </em><em>optional</em>) – joins the first triangle strip to the last one with a twist in
+the v direction.</p></li>
+<li><p><strong>twist_u</strong> (<em>bool</em><em>, </em><em>optional</em>) – Joins the first triangle strip to the last one with a twist in
+the u direction.</p></li>
+<li><p><strong>twist_v</strong> (<em>bool</em><em>, </em><em>optional</em>) – Joins the first triangle strip to the last one with a twist in
+the v direction.</p></li>
+<li><p><strong>clockwise</strong> (<em>bool</em><em>, </em><em>optional</em>) – Determines the ordering of the vertices forming the triangle
+strips.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="pyvista.surface_from_para">
+<code class="sig-prename descclassname">pyvista.</code><code class="sig-name descname">surface_from_para</code><span class="sig-paren">(</span><em class="sig-param">parametric_function</em>, <em class="sig-param">u_res=100</em>, <em class="sig-param">v_res=100</em>, <em class="sig-param">w_res=100</em><span class="sig-paren">)</span><a class="headerlink" href="#pyvista.surface_from_para" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a mesh from a parametric function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parametric_function</strong> (<em>vtk.vtkParametricFunction</em>) – Parametric function to generate mesh from.</p></li>
+<li><p><strong>u_res</strong> (<em>int</em><em>, </em><em>optional</em>) – Resolution in the u direction.</p></li>
+<li><p><strong>v_res</strong> (<em>int</em><em>, </em><em>optional</em>) – Resolution in the v direction.</p></li>
+<li><p><strong>w_res</strong> (<em>int</em><em>, </em><em>optional</em>) – Resolution in the w direction.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="utilities.html" class="btn btn-neutral float-right" title="General Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="geometric.html" class="btn btn-neutral float-left" title="Geometric Objects" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017-2020, The PyVista Developers
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
