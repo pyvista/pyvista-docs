@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Point Cloud &#8212; PyVista 0.31.dev0 documentation</title>
+    <title>Create Point Cloud &#8212; PyVista 0.31.1 documentation</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -962,11 +962,11 @@ than creating a PyVista mesh with your own NumPy arrays of vertice locations.</p
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[4.80939575e+05, 4.40018720e+06, 1.75944995e+03],
-                 [4.80957775e+05, 4.40009730e+06, 1.77281995e+03],
-                 [4.81004175e+05, 4.40009750e+06, 1.76822998e+03],
-                 [4.81107475e+05, 4.40024510e+06, 1.76938000e+03],
-                 [4.81076575e+05, 4.40023430e+06, 1.75704004e+03]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[4.81075675e+05, 4.40017680e+06, 1.75913000e+03],
+                 [4.80991775e+05, 4.40019320e+06, 1.75916003e+03],
+                 [4.80959975e+05, 4.40010660e+06, 1.76342004e+03],
+                 [4.81032175e+05, 4.40017480e+06, 1.75993005e+03],
+                 [4.81017375e+05, 4.40014970e+06, 1.76107996e+03]])
 </pre></div>
 </div>
 <p>Now that you have a NumPy array of points/vertices either from our sample
@@ -983,7 +983,7 @@ data or your own project, creating a PyVista mesh of those points is simply:</p>
 <tr><td>N Points</td><td>67841</td></tr>
 <tr><td>X Bounds</td><td>4.809e+05, 4.811e+05</td></tr>
 <tr><td>Y Bounds</td><td>4.400e+06, 4.400e+06</td></tr>
-<tr><td>Z Bounds</td><td>1.754e+03, 1.787e+03</td></tr>
+<tr><td>Z Bounds</td><td>1.754e+03, 1.785e+03</td></tr>
 <tr><td>N Arrays</td><td>0</td></tr>
 </table>
 
@@ -1006,8 +1006,8 @@ depth perception with point clouds (learn more in <a class="reference internal" 
 </div>
 <img alt="create point cloud" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.3429432355, 4400455.467942938, 2064.2978993130805),
- (481028.37499997707, 4400161.49999968, 1770.3299560546875),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.0454566318, 4400455.170456334, 2062.960495717257),
+ (481028.37499997707, 4400161.49999968, 1769.2900390625),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -1033,8 +1033,8 @@ we specify to render every point as its own sphere.</p>
 </div>
 <img alt="create point cloud" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.3429432355, 4400455.467942938, 2064.2978993130805),
- (481028.37499997707, 4400161.49999968, 1770.3299560546875),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(481322.0454566318, 4400455.170456334, 2062.960495717257),
+ (481028.37499997707, 4400161.49999968, 1769.2900390625),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -1060,11 +1060,11 @@ cloud and add those vectors to the mesh.</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[-0.98134687,  0.12428008,  0.14667239],
-                 [ 0.2407255 ,  0.40417528, -0.88243616],
-                 [ 0.6794797 ,  0.70066428, -0.21766235],
-                 [ 0.64884006,  0.75098497, -0.12258936],
-                 [ 0.89718841,  0.0857415 ,  0.43324515]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>pyvista_ndarray([[-0.59975571, -0.63997198,  0.48034253],
+                 [-0.10247538,  0.82277682,  0.55905017],
+                 [ 0.44011202, -0.89453589, -0.07814696],
+                 [ 0.03768009, -0.15555323,  0.98710861],
+                 [-0.18839151, -0.82666024, -0.53022777]])
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">point_cloud</span><span class="p">[</span><span class="s1">&#39;vectors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vectors</span>
@@ -1087,12 +1087,12 @@ cloud and add those vectors to the mesh.</p>
 </div>
 <img alt="create point cloud" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-point-cloud_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(2.8809846207667222, 2.8696506820786825, 2.8756500758398404),
- (0.5002516247332096, 0.48891768604516983, 0.4949170798063278),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(2.9296360562004606, 2.9288270200051825, 2.9239834720649283),
+ (0.49716199189424515, 0.496352955698967, 0.49150940775871277),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  1.823 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  5.500 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-00-load-create-point-cloud-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/b56f133896ca717685efadc3dcd1d66c/create-point-cloud.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">create-point-cloud.py</span></code></a></p>

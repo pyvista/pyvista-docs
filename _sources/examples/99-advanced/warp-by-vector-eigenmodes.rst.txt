@@ -279,8 +279,8 @@ Now, let's display a mode on a mesh of the cube.
  .. code-block:: none
 
 
-    [(0.5629007112357649, 0.7152993718952444, 0.7152993718952456),
-     (-0.1523986606594811, -1.6375789613221059e-15, -4.440892098500626e-16),
+    [(0.5624591927763861, 0.7150308248544035, 0.7150308248544028),
+     (-0.15257163207801672, 7.216449660063518e-16, 0.0),
      (0.0, 0.0, 1.0)]
 
 
@@ -322,8 +322,8 @@ Finally, let's make a gallery of the first 8 unique eigenmodes.
  .. code-block:: none
 
 
-    [(0.7392698613029318, 0.7392698613028957, 0.7392698613028945),
-     (3.7247982476174e-14, 1.2212453270876722e-15, -1.3877787807814457e-17),
+    [(0.7392698613030427, 0.7392698613030582, 0.7392698613030666),
+     (-1.8957058145474548e-14, -3.594347042223944e-15, 4.884981308350689e-15),
      (0.0, 0.0, 1.0)]
 
 
@@ -331,7 +331,7 @@ Finally, let's make a gallery of the first 8 unique eigenmodes.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  6.047 seconds)
+   **Total running time of the script:** ( 0 minutes  10.325 seconds)
 
 
 .. _sphx_glr_download_examples_99-advanced_warp-by-vector-eigenmodes.py:
