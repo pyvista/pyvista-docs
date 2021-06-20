@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Triangulated Surface &#8212; PyVista 0.31.1 documentation</title>
+    <title>Create Triangulated Surface &#8212; PyVista 0.31.2 documentation</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet" />
   <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -972,11 +972,11 @@ to download the full example code</p>
 </pre></div>
 </div>
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-201.49212276, -201.66010028,    1.71923016],
-       [-182.45288353, -201.66010028,    2.4778163 ],
-       [-156.79305436, -201.66010028,    3.82909043],
-       [-140.99216114, -201.66010028,    4.84472706],
-       [-115.51908349, -201.66010028,    6.71670328]])
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-196.098722  , -199.88396099,    1.98328558],
+       [-181.21668753, -199.88396099,    2.62614214],
+       [-158.7878527 , -199.88396099,    3.8451445 ],
+       [-141.76885095, -199.88396099,    4.96577778],
+       [-116.93123867, -199.88396099,    6.84723255]])
 </pre></div>
 </div>
 <p>Now use those points to create a point cloud PyVista data object. This will
@@ -988,8 +988,8 @@ be encompassed in a <a class="reference internal" href="../../core/points.html#p
 </div>
 <img alt="create tri surface" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-tri-surface_001.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(638.7620092195164, 639.5424307085673, 690.9499272956798),
- (-1.837722064184561, -1.057300575133695, 50.350196011978845),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(640.6301763437339, 640.0133037178401, 689.2223125650083),
+ (1.8484581852094095, 1.2315855593156613, 50.44059440648391),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -1001,8 +1001,8 @@ triangulation to turn those boring discrete points into a connected surface.</p>
 </div>
 <img alt="create tri surface" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-tri-surface_002.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(638.7620092195164, 639.5424307085673, 690.9499272956798),
- (-1.837722064184561, -1.057300575133695, 50.350196011978845),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(640.6301763437339, 640.0133037178401, 689.2223125650083),
+ (1.8484581852094095, 1.2315855593156613, 50.44059440648391),
  (0.0, 0.0, 1.0)]
 </pre></div>
 </div>
@@ -1028,8 +1028,8 @@ triangulation to turn those boring discrete points into a connected surface.</p>
 <tr><th>PolyData</th><th>Information</th></tr>
 <tr><td>N Cells</td><td>100</td></tr>
 <tr><td>N Points</td><td>100</td></tr>
-<tr><td>X Bounds</td><td>9.458e-03, 9.279e+00</td></tr>
-<tr><td>Y Bounds</td><td>5.925e-02, 9.279e+00</td></tr>
+<tr><td>X Bounds</td><td>4.908e-02, 9.271e+00</td></tr>
+<tr><td>Y Bounds</td><td>2.020e-03, 9.271e+00</td></tr>
 <tr><td>Z Bounds</td><td>0.000e+00, 0.000e+00</td></tr>
 <tr><td>N Arrays</td><td>0</td></tr>
 </table>
@@ -1044,8 +1044,8 @@ triangulation to turn those boring discrete points into a connected surface.</p>
 </div>
 <img alt="create tri surface" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-tri-surface_003.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.644256515804663, 4.669031037575289, 25.256767389682068),
- (4.644256515804663, 4.669031037575289, 0.0),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.660262495205847, 4.636344289979955, 25.259283771027714),
+ (4.660262495205847, 4.636344289979955, 0.0),
  (0.0, 1.0, 0.0)]
 </pre></div>
 </div>
@@ -1057,8 +1057,8 @@ added unwanted triangles. We can mitigate that with the <code class="docutils li
 </div>
 <img alt="create tri surface" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-tri-surface_004.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.644256515804663, 4.669031037575289, 25.256767389682068),
- (4.644256515804663, 4.669031037575289, 0.0),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.660262495205847, 4.636344289979955, 25.259283771027714),
+ (4.660262495205847, 4.636344289979955, 0.0),
  (0.0, 1.0, 0.0)]
 </pre></div>
 </div>
@@ -1084,12 +1084,12 @@ added unwanted triangles. We can mitigate that with the <code class="docutils li
 </div>
 <img alt="create tri surface" class="sphx-glr-single-img" src="../../_images/sphx_glr_create-tri-surface_005.png" />
 <p class="sphx-glr-script-out">Out:</p>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.644256515804663, 4.669031037575289, 25.256767389682068),
- (4.644256515804663, 4.669031037575289, 0.0),
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[(4.660262495205847, 4.636344289979955, 25.259283771027714),
+ (4.660262495205847, 4.636344289979955, 0.0),
  (0.0, 1.0, 0.0)]
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.396 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  3.242 seconds)</p>
 <div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-00-load-create-tri-surface-py">
 <div class="sphx-glr-download sphx-glr-download-python docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/738c0dd2d950447063531d80b4111e12/create-tri-surface.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">create-tri-surface.py</span></code></a></p>

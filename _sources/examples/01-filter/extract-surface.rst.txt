@@ -115,8 +115,8 @@ to demonstrate how to extract the surface of an UnstructuredGrid.
     /home/vsts/work/1/s/examples/01-filter/extract-surface.py:58: UserWarning: VTK 9 no longer accepts an offset array
       grid = pv.UnstructuredGrid(offset, cells, celltypes, pts)
 
-    [(4.410001617990397, 4.380835873208903, 4.447951716504954),
-     (0.10972589254379272, 0.08056014776229858, 0.1476759910583496),
+    [(4.461492169150527, 4.406497049578841, 4.432668793448623),
+     (0.14492380619049072, 0.08992868661880493, 0.11610043048858643),
      (0.0, 0.0, 1.0)]
 
 
@@ -153,8 +153,8 @@ https://prod.sandia.gov/techlib-noauth/access-control.cgi/2004/041617.pdf
  .. code-block:: none
 
 
-    [(4.562155582114612, 4.563162185355579, 4.684775628253376),
-     (0.10972589254379272, 0.11073249578475952, 0.23234593868255615),
+    [(4.697495538724395, 4.583667892945739, 4.623891253007384),
+     (0.22030150890350342, 0.10647386312484741, 0.14669722318649292),
      (0.0, 0.0, 1.0)]
 
 
@@ -162,7 +162,7 @@ https://prod.sandia.gov/techlib-noauth/access-control.cgi/2004/041617.pdf
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  1.668 seconds)
+   **Total running time of the script:** ( 0 minutes  1.543 seconds)
 
 
 .. _sphx_glr_download_examples_01-filter_extract-surface.py:
