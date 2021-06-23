@@ -67,6 +67,12 @@ Plot an airplane with the map of the earth in the background
 
  .. code-block:: none
 
+    WARNING:root:Encountered issue in callback (most recent call last):
+      File "/home/vsts/work/1/s/pyvista/plotting/background_renderer.py", line 43, in resize
+        if self._prior_window_size != self.parent.window_size:
+      File "/home/vsts/work/1/s/pyvista/plotting/plotting.py", line 756, in window_size
+        return list(self.ren_win.GetSize())
+    AttributeError: 'Plotter' object has no attribute 'ren_win'
 
     [(3140.593704331348, 2919.620300400684, 2375.7925778512454),
      (896.9955291748047, 676.0221252441406, 132.19440269470215),
@@ -118,6 +124,12 @@ Plot several earth related plots
 
  .. code-block:: none
 
+    WARNING:root:Encountered issue in callback (most recent call last):
+      File "/home/vsts/work/1/s/pyvista/plotting/background_renderer.py", line 43, in resize
+        if self._prior_window_size != self.parent.window_size:
+      File "/home/vsts/work/1/s/pyvista/plotting/plotting.py", line 756, in window_size
+        return list(self.ren_win.GetSize())
+    AttributeError: 'Plotter' object has no attribute 'ren_win'
 
     [(24578060184.082455, 24590884070.56062, 24590884070.56062),
      (-12823886.478166103, 4.76837158203125e-07, 0.0),
@@ -128,7 +140,7 @@ Plot several earth related plots
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  10.232 seconds)
+   **Total running time of the script:** ( 0 minutes  11.858 seconds)
 
 
 .. _sphx_glr_download_examples_02-plot_background_image.py:
